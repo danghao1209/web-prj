@@ -1,11 +1,10 @@
 import { Fragment } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import DefaultLayout from '~/layouts';
+import { Routes, Route } from 'react-router-dom';
 import { publicRoutes } from '~/routes';
+import DefaultLayout from '~/layouts';
 
 function App() {
-    <Router>
+    return (
         <div>
             <Routes>
                 {publicRoutes.map((route, index) => {
@@ -32,7 +31,7 @@ function App() {
                 })}
             </Routes>
         </div>
-    </Router>;
+    );
 }
 
 export default App;
