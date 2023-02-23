@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { useState, useRef } from 'react';
 import {
     faAngleDown,
     faAngleRight,
@@ -14,6 +14,7 @@ import Tippy from '@tippyjs/react/headless';
 import Button from '~/components/Button';
 
 function Header() {
+    const ref = useRef();
     const [valueSearch, setValueSearch] = useState('');
     const MenuItem = [
         { title: 'TOP', children: ['T-Shirt', 'Shirt & Polo', 'Hoodie & Sweatshirt', 'Jacket'] },
@@ -126,9 +127,12 @@ function Header() {
                                 className="min-w-[1025px] max-h-[600px] w-[1791px] p-[10px] border border-solid border-gray-200 opacity-100 bg-gray-100 bg-opacity-60"
                             >
                                 <div className="w-[1300px] flex justify-center mx-auto my-0">
-                                    {MenuItem.map((item) => {
+                                    {MenuItem.map((item, index) => {
                                         return (
-                                            <div className="w-[20%] p-[10px] leading-[1.3] flex flex-col text-left">
+                                            <div
+                                                className="w-[20%] p-[10px] leading-[1.3] flex flex-col text-left"
+                                                key={index}
+                                            >
                                                 <Link to="/top">
                                                     <div className="pt-[5px] font-semibold mb-[10px]">{item.title}</div>
                                                 </Link>
@@ -168,36 +172,37 @@ function Header() {
                             >
                                 {MenuItem.map((item, index) => {
                                     return (
-                                        <Tippy
-                                            key={index}
-                                            interactive
-                                            placement="right-start"
-                                            offset={[0, 0]}
-                                            render={(attrs) => (
-                                                <div>
-                                                    {item.children.map((child, index) => {
-                                                        return (
-                                                            <Link key={index} to="/t-shirt">
-                                                                <div
-                                                                    tabIndex="-1"
-                                                                    {...attrs}
-                                                                    className="w-[220px] p-[10px] shadow-sm border-b-[1px] border-gray-200 opacity-100 bg-gray-100 bg-opacity-60 text-left"
-                                                                >
-                                                                    {child}
-                                                                </div>
-                                                            </Link>
-                                                        );
-                                                    })}
-                                                </div>
-                                            )}
-                                        >
-                                            <Link key={index} to="/top">
-                                                <div className="flex justify-between mx-auto my-0 text-left items-center py-[10px] pl-[5px] pr-[20px]">
-                                                    <div>{item.title}</div>
-                                                    <FontAwesomeIcon icon={faAngleRight} />
-                                                </div>
-                                            </Link>
-                                        </Tippy>
+                                        <div ref={ref} key={index}>
+                                            <Tippy
+                                                interactive
+                                                placement="right-start"
+                                                offset={[0, 0]}
+                                                render={(attrs) => (
+                                                    <div key={index}>
+                                                        {item.children.map((child, index) => {
+                                                            return (
+                                                                <Link key={index} to="/t-shirt">
+                                                                    <div
+                                                                        tabIndex="-1"
+                                                                        {...attrs}
+                                                                        className="w-[220px] p-[10px] shadow-sm border-b-[1px] border-gray-200 opacity-100 bg-gray-100 bg-opacity-60 text-left"
+                                                                    >
+                                                                        {child}
+                                                                    </div>
+                                                                </Link>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                )}
+                                            >
+                                                <Link key={index} to="/top">
+                                                    <div className="flex justify-between mx-auto my-0 text-left items-center py-[10px] pl-[5px] pr-[20px]">
+                                                        <div>{item.title}</div>
+                                                        <FontAwesomeIcon icon={faAngleRight} />
+                                                    </div>
+                                                </Link>
+                                            </Tippy>
+                                        </div>
                                     );
                                 })}
                             </div>
