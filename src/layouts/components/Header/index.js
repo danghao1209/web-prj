@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import {
     faAngleDown,
+    faAngleRight,
     faBagShopping,
     faLocationDot,
     faMagnifyingGlass,
@@ -14,6 +15,11 @@ import Button from '~/components/Button';
 
 function Header() {
     const [valueSearch, setValueSearch] = useState('');
+    const MenuItem = [
+        { title: 'TOP', children: ['T-Shirt', 'Shirt & Polo', 'Hoodie & Sweatshirt', 'Jacket'] },
+        { title: 'BOTTOM', children: ['Pants', 'Shorts', 'Hoodie & Sweatshirt'] },
+        { title: 'ACCESSORY', children: ['Bag & Backpack', 'Hat', 'Others'] },
+    ];
 
     const handleChange = (e) => {
         const valueSearch = e.target.value;
@@ -112,7 +118,6 @@ function Header() {
                     <Tippy
                         interactive
                         placement="bottom"
-                        delay={[50, 700]}
                         offset={[16, 8]}
                         render={(attrs) => (
                             <div
@@ -121,59 +126,23 @@ function Header() {
                                 className="min-w-[1025px] max-h-[600px] w-[1791px] p-[10px] border border-solid border-gray-200 opacity-100 bg-gray-100 bg-opacity-60"
                             >
                                 <div className="w-[1300px] flex justify-center mx-auto my-0">
-                                    <div className="w-[20%] p-[10px] leading-[1.3] flex flex-col text-left">
-                                        <Link to="/top">
-                                            <div className="pt-[5px] font-semibold mb-[10px]">TOP</div>
-                                        </Link>
+                                    {MenuItem.map((item) => {
+                                        return (
+                                            <div className="w-[20%] p-[10px] leading-[1.3] flex flex-col text-left">
+                                                <Link to="/top">
+                                                    <div className="pt-[5px] font-semibold mb-[10px]">{item.title}</div>
+                                                </Link>
 
-                                        <Link to="/t-shirt">
-                                            <div className="pt-[5px] font-light">T-Shirt</div>
-                                        </Link>
-
-                                        <Link to="/shirt">
-                                            <div className="pt-[5px] font-light">Shirt & Polo</div>
-                                        </Link>
-
-                                        <Link to="/hoodie">
-                                            <div className="pt-[5px] font-light">Hoodie & Sweatshirt</div>
-                                        </Link>
-
-                                        <Link to="/jacket">
-                                            <div className="pt-[5px] font-light">Jacket</div>
-                                        </Link>
-                                    </div>
-
-                                    <div className="w-[20%] p-[10px] leading-[1.3] flex flex-col text-left">
-                                        <Link to="/top">
-                                            <div className="pt-[5px] font-semibold mb-[10px]">BOTTOM</div>
-                                        </Link>
-
-                                        <Link to="/hoodie">
-                                            <div className="pt-[5px] font-light">Pants</div>
-                                        </Link>
-
-                                        <Link to="/jacket">
-                                            <div className="pt-[5px] font-light">Shorts</div>
-                                        </Link>
-                                    </div>
-
-                                    <div className="w-[20%] p-[10px] leading-[1.3] flex flex-col text-left">
-                                        <Link to="/top">
-                                            <div className="pt-[5px] font-semibold mb-[10px]">ACCESSORY</div>
-                                        </Link>
-
-                                        <Link to="/t-shirt">
-                                            <div className="pt-[5px] font-light">Bag & Backpack</div>
-                                        </Link>
-
-                                        <Link to="/shirt">
-                                            <div className="pt-[5px] font-light">Hat</div>
-                                        </Link>
-
-                                        <Link to="/hoodie">
-                                            <div className="pt-[5px] font-light">Others</div>
-                                        </Link>
-                                    </div>
+                                                {item.children.map((child, index) => {
+                                                    return (
+                                                        <Link to="/t-shirt">
+                                                            <div className="pt-[5px] font-light">{child}</div>
+                                                        </Link>
+                                                    );
+                                                })}
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         )}
@@ -186,12 +155,61 @@ function Header() {
                         </Link>
                     </Tippy>
 
-                    <Link>
-                        <div className="px-[20px] py-[10px] flex items-center">
-                            <div className="mr-[2px]">NEW ARRIVAL</div>
-                            <FontAwesomeIcon icon={faAngleDown} />
-                        </div>
-                    </Link>
+                    <Tippy
+                        interactive
+                        delay={[[50, 200]]}
+                        placement="bottom-start"
+                        offset={[5, 5]}
+                        render={(attrs) => (
+                            <div
+                                tabIndex="-1"
+                                {...attrs}
+                                className="w-[220px] shadow-sm border-b-[1px] border-gray-200 opacity-100 bg-gray-100 bg-opacity-60"
+                            >
+                                {MenuItem.map((item, index) => {
+                                    return (
+                                        <Tippy
+                                            key={index}
+                                            interactive
+                                            placement="right-start"
+                                            offset={[0, 0]}
+                                            render={(attrs) => (
+                                                <div>
+                                                    {item.children.map((child, index) => {
+                                                        return (
+                                                            <Link key={index} to="/t-shirt">
+                                                                <div
+                                                                    tabIndex="-1"
+                                                                    {...attrs}
+                                                                    className="w-[220px] p-[10px] shadow-sm border-b-[1px] border-gray-200 opacity-100 bg-gray-100 bg-opacity-60 text-left"
+                                                                >
+                                                                    {child}
+                                                                </div>
+                                                            </Link>
+                                                        );
+                                                    })}
+                                                </div>
+                                            )}
+                                        >
+                                            <Link key={index} to="/top">
+                                                <div className="flex justify-between mx-auto my-0 text-left items-center py-[10px] pl-[5px] pr-[20px]">
+                                                    <div>{item.title}</div>
+                                                    <FontAwesomeIcon icon={faAngleRight} />
+                                                </div>
+                                            </Link>
+                                        </Tippy>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    >
+                        <Link>
+                            <div className="px-[20px] py-[10px] flex items-center">
+                                <div className="mr-[2px]">NEW ARRIVAL</div>
+                                <FontAwesomeIcon icon={faAngleDown} />
+                            </div>
+                        </Link>
+                    </Tippy>
                     <Link>
                         <div className="px-[20px] py-[10px]">BST THU ĐÔNG</div>
                     </Link>
