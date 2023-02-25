@@ -80,7 +80,7 @@ function Header() {
                                         className="p-[10px] rounded-l-[4px]  border border-solid border-gray-200"
                                         onChange={handleChange}
                                     />
-                                    <Button>
+                                    <Button className="bg-neutral-400">
                                         <div>Tìm kiếm</div>
                                     </Button>
                                 </div>
@@ -124,7 +124,7 @@ function Header() {
                             <div
                                 tabIndex="-1"
                                 {...attrs}
-                                className="min-w-[1025px] max-h-[600px] w-[1791px] p-[10px] border border-solid border-gray-200 opacity-100 bg-gray-100 bg-opacity-60"
+                                className="min-w-[1025px] max-h-[600px] w-[1791px] p-[10px] border border-solid border-gray-200 opacity-100 bg-gray-100 bg-opacity-100"
                             >
                                 <div className="w-[1300px] flex justify-center mx-auto my-0">
                                     {MenuItem.map((item, index) => {
@@ -133,13 +133,13 @@ function Header() {
                                                 className="w-[20%] p-[10px] leading-[1.3] flex flex-col text-left"
                                                 key={index}
                                             >
-                                                <Link to="/top">
+                                                <Link to="/top" className="hover:text-red-600">
                                                     <div className="pt-[5px] font-semibold mb-[10px]">{item.title}</div>
                                                 </Link>
 
                                                 {item.children.map((child, index) => {
                                                     return (
-                                                        <Link to="/t-shirt">
+                                                        <Link to="/t-shirt" className="hover:text-red-600">
                                                             <div className="pt-[5px] font-light">{child}</div>
                                                         </Link>
                                                     );
@@ -168,7 +168,7 @@ function Header() {
                             <div
                                 tabIndex="-1"
                                 {...attrs}
-                                className="w-[220px] shadow-sm border-b-[1px] border-gray-200 opacity-100 bg-gray-100 bg-opacity-60"
+                                className="w-[220px] shadow-sm border-b-[1px] border-gray-200 opacity-100 bg-gray-100 bg-opacity-100"
                             >
                                 {MenuItem.map((item, index) => {
                                     return (
@@ -181,7 +181,11 @@ function Header() {
                                                     <div key={index}>
                                                         {item.children.map((child, index) => {
                                                             return (
-                                                                <Link key={index} to="/t-shirt">
+                                                                <Link
+                                                                    key={index}
+                                                                    to="/t-shirt"
+                                                                    className="hover:text-red-600"
+                                                                >
                                                                     <div
                                                                         tabIndex="-1"
                                                                         {...attrs}
@@ -195,7 +199,7 @@ function Header() {
                                                     </div>
                                                 )}
                                             >
-                                                <Link key={index} to="/top">
+                                                <Link key={index} to="/top" className="hover:text-red-600">
                                                     <div className="flex justify-between mx-auto my-0 text-left items-center py-[10px] pl-[5px] pr-[20px]">
                                                         <div>{item.title}</div>
                                                         <FontAwesomeIcon icon={faAngleRight} />

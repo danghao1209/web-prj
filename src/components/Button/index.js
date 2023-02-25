@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Button({
     to,
+    className,
     href,
     primary = false,
     outline = false,
@@ -36,7 +37,7 @@ function Button({
     }
 
     return (
-        <Comp className=" justify-center bg-slate-400 px-[6px] py-[1px] content-center" {...props}>
+        <Comp className={`justify-center  px-[6px] py-[1px] content-center ${className}`} {...props}>
             <span className="">{children}</span>
         </Comp>
     );
