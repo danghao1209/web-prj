@@ -105,7 +105,7 @@ function Header() {
             </div>
             {/* header 2 */}
             <div className="items-center ">
-                <div className="w-[1811px] h-[44pxs] flex text-center m-0 justify-center">
+                <div className=" h-[44pxs] flex text-center m-0 justify-center">
                     <Link to="/">
                         <div className="px-[20px] py-[10px]">TRANG CHỦ</div>
                     </Link>
@@ -124,9 +124,9 @@ function Header() {
                             <div
                                 tabIndex="-1"
                                 {...attrs}
-                                className="min-w-[1025px] max-h-[600px] w-[1791px] p-[10px] border border-solid border-gray-200 opacity-100 bg-gray-100 bg-opacity-100"
+                                className="min-w-[1025px] max-h-[600px] p-[10px] border border-solid border-gray-200 opacity-100 bg-gray-100 bg-opacity-100"
                             >
-                                <div className="w-[1300px] flex justify-center mx-auto my-0">
+                                <div className=" flex justify-center mx-auto my-0">
                                     {MenuItem.map((item, index) => {
                                         return (
                                             <div
