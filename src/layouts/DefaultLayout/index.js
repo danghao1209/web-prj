@@ -4,7 +4,7 @@ import Footer from '~/layouts/components/Footer';
 
 function DefaultLayout({ children }) {
     return (
-        <div className={''}>
+        <div className="relative">
             <Header />
             <div className={''}>
                 <div className={''}>{children}</div>

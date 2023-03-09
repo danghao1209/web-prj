@@ -5,6 +5,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Barlow Semi Condensed', 'sans-serif'],
+                utm_aptima: ['UTM Aptima', 'sans-serif'],
             },
             fontSize: {
                 sm: '14px',

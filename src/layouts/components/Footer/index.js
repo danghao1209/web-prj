@@ -14,7 +14,7 @@ import Button from '~/components/Button';
 
 function Footer() {
     return (
-        <div className="flex flex-col font-medium justify-center">
+        <div className="flex flex-col font-medium justify-center mt-[60px]">
             <div className="mx-[200px]">
                 <div className="flex justify-center mx-[-15px] box-border">
                     <div className="w-[25%] px-[15px] ">

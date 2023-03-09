@@ -29,7 +29,7 @@ function Header() {
         }
     };
     return (
-        <div className="font-sans font-medium text-sm px-[15px]">
+        <div className="font-sans font-medium text-sm px-[15px] fixed w-full z-10 top-0">
             {/* header1 */}
             <div className="flex justify-between items-center h-16 px-12">
                 <div className="flex items-center ">
@@ -151,7 +151,7 @@ function Header() {
                             </div>
                         )}
                     >
-                        <Link>
+                        <Link to="/product/10">
                             <div className="px-[20px] py-[10px] flex items-center">
                                 <div className="mr-[2px]">SẢN PHẨM</div>
                                 <FontAwesomeIcon icon={faAngleDown} />
