@@ -37,7 +37,7 @@ function Button({
     }
 
     return (
-        <Comp className={`justify-center  px-[6px] py-[1px] content-center ${className}`} {...props}>
+        <Comp className={`${className} justify-center content-center`} {...props}>
             <span className="">{children}</span>
         </Comp>
     );

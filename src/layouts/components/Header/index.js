@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
     faAngleDown,
     faAngleRight,
@@ -15,12 +15,23 @@ import Button from '~/components/Button';
 
 function Header() {
     const ref = useRef();
+
     const [valueSearch, setValueSearch] = useState('');
+    const [isLog, setIsLog] = useState(false);
+
     const MenuItem = [
         { title: 'TOP', children: ['T-Shirt', 'Shirt & Polo', 'Hoodie & Sweatshirt', 'Jacket'] },
         { title: 'BOTTOM', children: ['Pants', 'Shorts', 'Hoodie & Sweatshirt'] },
         { title: 'ACCESSORY', children: ['Bag & Backpack', 'Hat', 'Others'] },
     ];
+
+    useEffect(() => {
+        let token = localStorage.getItem('tokenUser');
+        if (token) {
+            console.log(token);
+            setIsLog(true);
+        }
+    }, [isLog]);
 
     const handleChange = (e) => {
         const valueSearch = e.target.value;
@@ -28,8 +39,9 @@ function Header() {
             setValueSearch(valueSearch);
         }
     };
+
     return (
-        <div className="font-sans font-medium text-sm px-[15px] fixed w-full z-10 top-0">
+        <div className="font-sans font-medium text-sm px-[15px] fixed w-full z-10 top-0 bg-white">
             {/* header1 */}
             <div className="flex justify-between items-center h-16 px-12">
                 <div className="flex items-center ">
@@ -91,7 +103,8 @@ function Header() {
                     </div>
                     <div className="flex items-center py-5 pl-5 ml-[1.875vw]">
                         <FontAwesomeIcon icon={faUser} className="text-xl mr-1" />
-                        <Link to="/member/profile/:id">
+                        <Link to={isLog ? '/account' : '/login'}>
+                            {console.log(isLog)}
                             <div className="">TÀI KHOẢN</div>
                         </Link>
                     </div>
@@ -151,7 +164,7 @@ function Header() {
                             </div>
                         )}
                     >
-                        <Link to="/product/10">
+                        <Link to="/product/all">
                             <div className="px-[20px] py-[10px] flex items-center">
                                 <div className="mr-[2px]">SẢN PHẨM</div>
                                 <FontAwesomeIcon icon={faAngleDown} />
