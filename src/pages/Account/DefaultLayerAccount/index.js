@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 
 function DefaultLayerAccount({ children }) {
     return (
-        <div className="mt-[105px]">
-            <div className="py-[10px]">
+        <div className="mt-[105px] mb-[250px]">
+            <div className="py-[20px] mb-[30px]">
                 <div className="w-[77%] mx-[auto] mb-[20px] px-[15px]">
                     <div className="mx-[-15px] flex">
                         <div className="w-[25%] px-[15px]">

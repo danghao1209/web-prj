@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 
 import Header from '~/layouts/components/Header';
 import Footer from '~/layouts/components/Footer';

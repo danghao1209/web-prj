@@ -4965,6 +4965,11 @@
   "resolved" "https://registry.npmjs.org/handle-thing/-/handle-thing-2.0.1.tgz"
   "version" "2.0.1"
 
+"hanhchinhvn@^1.6.0":
+  "integrity" "sha512-ubHjaHsBHsiV5zY1pa6y9drzAZWS/zkJ7MpggZu3//zfh/LOwCyBqnZu83vlDZeMRIMgR95ScdUB27y90f3XRg=="
+  "resolved" "https://registry.npmjs.org/hanhchinhvn/-/hanhchinhvn-1.6.0.tgz"
+  "version" "1.6.0"
+
 "harmony-reflect@^1.4.6":
   "integrity" "sha512-HIp/n38R9kQjDEziXyDTuW3vvoxxyxjxFzXLrBr18uB47GnSt+G9D29fqrpM5ZkspMcPICud3XsBJQ4Y2URg8g=="
   "resolved" "https://registry.npmjs.org/harmony-reflect/-/harmony-reflect-1.6.2.tgz"

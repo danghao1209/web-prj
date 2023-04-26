@@ -43,8 +43,8 @@ function Header() {
     return (
         <div className="font-sans font-medium text-sm px-[15px] fixed w-full z-10 top-0 bg-white">
             {/* header1 */}
-            <div className="flex justify-between items-center h-16 px-12">
-                <div className="flex items-center ">
+            <div className="flex justify-between items-center h-[64px] px-[50px] mx-[-15px]">
+                <div className="flex items-center basis-[33.3333%]">
                     <div className="flex items-center py-5 pr-5 mr-[1.875vw]">
                         <FontAwesomeIcon icon={faLocationDot} className="text-xl mr-1" />
                         <Link to="/contact">
@@ -63,18 +63,18 @@ function Header() {
                     </div>
                 </div>
 
-                <div>
+                <div className="flex">
                     <Link to="/">
                         <img
                             src="//bizweb.dktcdn.net/100/414/728/themes/867455/assets/logo.png?1675329140775"
-                            className="w-80 h-9"
+                            className="h-9 m-auto leading-[23.8px] basis-[33.3333%]"
                             alt="Logo"
                         />
                     </Link>
                 </div>
 
-                <div className="flex items-center ml-[1.875vw]">
-                    <div>
+                <div className="flex items-center ml-[1.875vw] basis-[33.3333%] justify-end">
+                    <div className="">
                         <Tippy
                             interactive
                             delay={[0, 1000]}
@@ -108,7 +108,7 @@ function Header() {
                             <div className="">TÀI KHOẢN</div>
                         </Link>
                     </div>
-                    <div className="flex items-center ml-5 py-5 pr-5 ml-[1.875vw]">
+                    <div className="flex items-center py-5 pr-5 ml-[1.875vw]">
                         <Link to="/cart">
                             <div className="mr-1">GIỎ HÀNG</div>
                         </Link>

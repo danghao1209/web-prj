@@ -37,7 +37,7 @@ function App() {
         }
     }, []);
     return (
-        <div>
+        <div className="text-[#3D3D40]">
             <Routes>
                 {publicRoutes.map((route, index) => {
                     const Page = route.component;
