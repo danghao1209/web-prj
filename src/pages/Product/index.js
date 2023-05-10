@@ -1,6 +1,9 @@
 import DropDown from './DropDown';
 import ItemProduct from './ItemProduct';
 import InfoProduct from './InfoProduct';
+import IfLikeSlick from './IfLikeSlick';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhoneSquare } from '@fortawesome/free-solid-svg-icons';
 
 function Product() {
     const contents = [
@@ -49,8 +52,8 @@ function Product() {
         },
     ];
     return (
-        <div className="mt-[105px] pt-[50px] w-full">
-            <div className="px-[50px] flex">
+        <div className="mt-[105px] pt-[50px] w-full px-[50px]">
+            <div className="px-[50px] flex pb-[10px]">
                 {/* container trên */}
                 <div className="mx-[-15px] pb-[10px] flex w-[18%]">
                     <div className="px-[15px] text-[1.07143em] sticky top-0 w-[100%]">
@@ -70,6 +73,26 @@ function Product() {
                 </div>
             </div>
             {/* container dưới */}
+            {/* phần có thể b cũng thích */}
+            <div className="mt-[20px] mx-[-15px] mb-[10px]">
+                <div className="mb-[50px] flex text-center justify-center items-center">
+                    <div className="uppercase text-[26px] text-[#1c1c1c] leading-[28px] tracking-[2.4px] relative before:absolute before:w-[50px] before:left-[50%] before:bottom-[-15px] before:h-[2px] before:bg-[#000] before:ml-[-25px]">
+                        Có thể bạn cũng thích
+                    </div>
+                </div>
+                <div>
+                    <IfLikeSlick />
+                </div>
+            </div>
+            {/* hotline */}
+            <div className="py-[23px] bg-[#F3F3F3] rounded-[5px]">
+                <div className="flex items-center ml-[10px]">
+                    <FontAwesomeIcon icon={faPhoneSquare} className="text-[30px] mr-[5px]" />
+                    <div className="uppercase flex">
+                        Hotline đặt hàng: <div className="text-[#FF0000]">09047 08362</div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

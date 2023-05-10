@@ -45,17 +45,17 @@ function Header() {
             {/* header1 */}
             <div className="flex justify-between items-center h-[64px] px-[50px] mx-[-15px]">
                 <div className="flex items-center basis-[33.3333%]">
-                    <div className="flex items-center py-5 pr-5 mr-[1.875vw]">
-                        <FontAwesomeIcon icon={faLocationDot} className="text-xl mr-1" />
-                        <Link to="/contact">
+                    <div className="py-5 pr-5 mr-[1.875vw]">
+                        <Link to="/contact" className="flex items-center">
+                            <FontAwesomeIcon icon={faLocationDot} className="text-xl mr-1" />
                             <div className=" cursor-pointer" title="ĐỊA CHỈ: VIỆT NAM">
                                 ĐỊA CHỈ: VIỆT NAM
                             </div>
                         </Link>
                     </div>
-                    <div className="flex items-center py-5 pr-5">
-                        <FontAwesomeIcon icon={faPhone} className="text-xl mr-1" />
-                        <Link to="/contact">
+                    <div className="py-5 pr-5">
+                        <Link to="/contact" className="flex items-center">
+                            <FontAwesomeIcon icon={faPhone} className="text-xl mr-1" />
                             <div className="cursor-pointer" title="SĐT: 0904708362">
                                 SĐT: 0904708362
                             </div>
@@ -101,18 +101,18 @@ function Header() {
                             <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xl" />
                         </Tippy>
                     </div>
-                    <div className="flex items-center py-5 pl-5 ml-[1.875vw]">
-                        <FontAwesomeIcon icon={faUser} className="text-xl mr-1" />
-                        <Link to={isLog ? '/account' : '/login'}>
+                    <div className="py-5 pl-5 ml-[1.875vw]">
+                        <Link to={isLog ? '/account' : '/login'} className="flex items-center">
+                            <FontAwesomeIcon icon={faUser} className="text-xl mr-1" />
                             {console.log(isLog)}
                             <div className="">TÀI KHOẢN</div>
                         </Link>
                     </div>
-                    <div className="flex items-center py-5 pr-5 ml-[1.875vw]">
-                        <Link to="/cart">
+                    <div className="py-5 pr-5 ml-[1.875vw]">
+                        <Link to="/cart" className="flex items-center">
                             <div className="mr-1">GIỎ HÀNG</div>
+                            <FontAwesomeIcon icon={faBagShopping} className="text-xl" />
                         </Link>
-                        <FontAwesomeIcon icon={faBagShopping} className="text-xl" />
                     </div>
                 </div>
             </div>

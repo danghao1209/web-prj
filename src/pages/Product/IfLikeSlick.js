@@ -17,7 +17,7 @@ function IfLikeSlick() {
         arrows: true,
     };
     return (
-        <Slider {...settings}></Slider>
+        <Slider {...settings}>
             <div className="px-[15px] flex flex-col relative">
                 {false ? (
                     <div className="flex flex-col">
