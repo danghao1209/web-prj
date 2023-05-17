@@ -6,10 +6,10 @@ function Product({ product, path }) {
         <Link to={`../product/${product.id}`} key={product.id} className="px-[15px] flex flex-col relative">
             {isHover ? (
                 <div className="flex flex-col" onMouseOut={() => setIsHover(false)}>
-                    <img src={`${path}${product.thumbnail[0]}`} alt={product.title} />
+                    <img src={`${path}${product.thumbnail[1]}`} alt={product.title} />
                     <div className="absolute bottom-[120px] right-[20px] flex">
-                        {product.color.map((color) => {
-                            return <div className={`w-[15px] h-[15px] bg-[${color}] mr-[5px]`}></div>;
+                        {product.data.map((color) => {
+                            return <div className={`w-[15px] h-[15px] bg-[${color.color}] mr-[5px]`}></div>;
                         })}
                     </div>
                     <div class="absolute bottom-0 w-[calc(100%-30px)]">
@@ -26,8 +26,8 @@ function Product({ product, path }) {
                         onMouseOver={() => setIsHover(true)}
                     />
                     <div className="absolute bottom-[120px] right-[20px] flex">
-                        {product.color.map((color) => {
-                            return <div className={`w-[15px] h-[15px] bg-[${color}] mr-[5px]`}></div>;
+                        {product.data.map((color) => {
+                            return <div className={`w-[15px] h-[15px] bg-[${color.color}] mr-[5px]`}></div>;
                         })}
                     </div>
                     <div>

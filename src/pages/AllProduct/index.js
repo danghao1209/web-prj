@@ -93,6 +93,7 @@ function ProductPage() {
             </div>
 
             <div className="grid grid-cols-4 gap-y-[50px]">
+                {console.log(dataPro)}
                 {dataPro.length !== 0 ? (
                     dataPro.products.map((product) => {
                         return <Product product={product} path={path} />;
@@ -100,44 +101,6 @@ function ProductPage() {
                 ) : (
                     <div>Chưa có sản phẩm nào.</div>
                 )}
-
-                <div className="px-[15px] flex flex-col relative">
-                    {false ? (
-                        <div className="flex flex-col">
-                            <div className="">
-                                <img
-                                    src="https://bizweb.dktcdn.net/thumb/large/100/414/728/products/quan-dai2.jpg?v=1672820890000"
-                                    alt=""
-                                />
-                                <div className="w-[15px] h-[15px] bg-[#111827]"></div>
-                            </div>
-
-                            <div class="absolute bottom-0 w-[calc(100%-30px)]">
-                                <div className="h-[46px] px-[10px] border-[1px] border-black flex items-center justify-center ">
-                                    <div className="font-medium text-[13px]">Chi Tiết</div>
-                                </div>
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="flex flex-col relative">
-                            <img
-                                src="https://bizweb.dktcdn.net/thumb/large/100/414/728/products/quan-dai2.jpg?v=1672820890000"
-                                alt=""
-                            />
-                            <div className="absolute bottom-[120px] right-[10px] flex">
-                                <div className="w-[15px] h-[15px] bg-[#111827] mr-[5px]"></div>
-                                <div className="w-[15px] h-[15px] bg-[#111827] mr-[5px]"></div>
-                            </div>
-                            <div>
-                                <div className="mt-[20px] mb-[5px] text-[20px] text-ellipsis font-utm_aptima ">
-                                    CLOWNZ BASIC SWEAT PANTS
-                                </div>
-                                <div className="text-[16px]">PANTS & JEANS</div>
-                                <div className="font-medium">399.000₫</div>
-                            </div>
-                        </div>
-                    )}
-                </div>
             </div>
         </div>
     );
