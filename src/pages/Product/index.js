@@ -74,7 +74,7 @@ function Product() {
     const sizeSoldOut =
         'before:bg-[#aeaeae] before:w-[100%] before:h-[1px] before:absolute before:transform before:rotate-45 before:bottom-[50%] after:w-[100%] after:h-[1px] after:bg-[#aeaeae] after:absolute after:transform after:rotate-[-45deg] after:bottom-[50%]';
     return (
-        <div className="mt-[105px] pt-[50px] w-full px-[50px]">
+        <div className="mt-[105px] pt-[50px] w-full">
             <div className="px-[50px] flex pb-[10px]">
                 {/* container trên */}
                 <div className="mx-[-15px] pb-[10px] flex w-[18%]">
@@ -213,9 +213,15 @@ function Product() {
 
                                     {/* dùng map render ra mô tả */}
 
-                                    <div className="text-[#3d3d3d]">
-                                        <div>Chất liệu: 100% cotton</div>
-                                    </div>
+                                    {data
+                                        ? data.description.map((item, index) => {
+                                              return (
+                                                  <div className="text-[#3d3d3d] mb-[10px] font-semibold">
+                                                      <div className="">{item}</div>
+                                                  </div>
+                                              );
+                                          })
+                                        : ''}
                                 </div>
                             </div>
                         </div>
