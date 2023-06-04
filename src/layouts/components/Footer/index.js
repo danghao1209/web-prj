@@ -120,7 +120,7 @@ function Footer() {
                     </div>
                 </div>
             </div>
-            <div className="w-[100%] flex justify-center font-light ">
+            <div className="w-[100%] pt-[5px] flex justify-center font-light border-t border-[#f5f5f5]">
                 <div>
                     <FontAwesomeIcon icon={faCopyright} />
                 </div>

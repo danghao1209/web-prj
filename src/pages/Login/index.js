@@ -16,18 +16,19 @@ function Login() {
 
                 if (result.data.status === 1) {
                     success(result.data.message);
-                    localStorage.setItem('tokenUser', result.data.token);
-                    await setTimeout(() => {
+                    localStorage.setItem('tokenACCESS', result.data.tokenACCESS);
+                    localStorage.setItem('tokenREFRESH', result.data.tokenREFRESH);
+                    localStorage.setItem('userID', result.data.userId);
+
+                    setTimeout(() => {
                         navigate('/', { replace: true });
                     }, 3000);
-                    return null;
+                    return;
                 } else {
                     error(result.data.message);
-                    localStorage.removeItem('tokenUser');
-                    await setTimeout(() => {
-                        navigate('/login', { replace: true });
-                    }, 3000);
-                    return null;
+                    localStorage.removeItem('tokenACCESS');
+                    localStorage.removeItem('tokenREFRESH');
+                    return;
                 }
             } else {
                 warning('Vui lòng điền tài khoản và mật khẩu');

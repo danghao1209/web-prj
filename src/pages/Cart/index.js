@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EmptyCart from './EmptyCart';
+import Cart from './Cart';
 
 function CartPage() {
     const [cart, setCart] = useState();
+    useEffect(() => {
+        async function fectCart() {}
+        fectCart();
+    });
     return (
         <div className="pt-[108px] ">
             <div className="mx-[209px] mt-[30px] mb-[20px] px-[15px]">
@@ -20,7 +25,14 @@ function CartPage() {
                                     </div>
                                 </div>
                             </div>
-                            {cart ? <div>hihi</div> : <EmptyCart />}
+                            {/* {cart ? <div>hihi</div> : <EmptyCart />} */}
+                            {true ? (
+                                <div>
+                                    <Cart data={''} />
+                                </div>
+                            ) : (
+                                <EmptyCart />
+                            )}
                         </div>
                     </div>
                 </div>
