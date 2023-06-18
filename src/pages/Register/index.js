@@ -1,18 +1,16 @@
-import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { CircularProgress } from '@mui/material';
 
 import Button from '~/components/Button';
 import ToastMessage, { promise } from '~/components/Toast';
+import { setEmail, setPassword, setPhone, setLoading, setName } from '~/features/registerSlice';
 
 function Register() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const { email, password, name, phone, isLoading } = useSelector((state) => state.register);
     const onRegister = async () => {
         try {
             let result = await promise(
@@ -25,7 +23,7 @@ function Register() {
             );
             if (result.data.status) {
                 localStorage.setItem('tokenUser', result.data.token);
-                await setTimeout(() => {
+                setTimeout(() => {
                     navigate('/login', { replace: true });
                 }, 3000);
                 return null;
@@ -36,6 +34,16 @@ function Register() {
             }
         } catch (error) {}
     };
+
+    if (isLoading) {
+        return (
+            <div className="px-[50px] mx-[-15px]">
+                <div className="flex items-center justify-center">
+                    <CircularProgress color="inherit" />
+                </div>
+            </div>
+        );
+    }
     return (
         <div className="mt-[105px] flex justify-center flex-col items-center ">
             <div className="text-[26px] mt-[20px]">ĐĂNG KÝ TÀI KHOẢN</div>
@@ -48,7 +56,7 @@ function Register() {
                             className="px-[15px] appearance-none border border-gray-200 rounded w-full h-[48px] p-[1px] text-gray-600 leading-tight focus:outline-none bg-white focus:border-red-300"
                             type="text"
                             value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={(e) => dispatch(setName(e.target.value))}
                             placeholder="Nhập Họ Tên"
                         />
                     </div>
@@ -60,7 +68,7 @@ function Register() {
                             className="px-[15px] appearance-none border border-gray-200 rounded w-full h-[48px] p-[1px] text-gray-700 leading-tight focus:outline-none bg-white focus:border-red-300"
                             type="phone"
                             value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            onChange={(e) => dispatch(setPhone(e.target.value))}
                             placeholder="Nhập Số Điện Thoại"
                         />
                     </div>
@@ -72,7 +80,7 @@ function Register() {
                             className="px-[15px] appearance-none border border-gray-200 rounded w-full h-[48px] p-[1px] text-gray-700 leading-tight focus:outline-none bg-white focus:border-red-300"
                             type="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => dispatch(setEmail(e.target.value))}
                             placeholder="Nhập Địa Chỉ Email"
                         />
                     </div>
@@ -84,7 +92,7 @@ function Register() {
                             className="px-[15px] appearance-none border border-gray-200 rounded w-full h-[48px] p-[1px] text-gray-700 leading-tight focus:outline-none bg-white focus:border-red-300"
                             type="password"
                             value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) => dispatch(setPassword(e.target.value))}
                             placeholder="Nhập Mật Khẩu"
                         />
                     </div>

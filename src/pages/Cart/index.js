@@ -1,13 +1,67 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setLoading, setCart, setQuanlity, setError } from '~/features/cartSlice';
 import EmptyCart from './EmptyCart';
 import Cart from './Cart';
+import { CircularProgress } from '@mui/material';
 
-function CartPage() {
-    const [cart, setCart] = useState();
-    useEffect(() => {
-        async function fectCart() {}
-        fectCart();
+const fetchData = (tokenACCESS) =>
+    axios.get('http://localhost:1209/api/cart', {
+        headers: {
+            Authorization: tokenACCESS,
+        },
     });
+function CartPage() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { cart, isLoading } = useSelector((state) => state.cart);
+
+    useEffect(() => {
+        const tokenACCESS = localStorage.getItem('tokenACCESS');
+        const tokenREFRESH = localStorage.getItem('tokenREFRESH');
+
+        if (!tokenREFRESH) {
+            navigate('/login', { replace: true });
+            return;
+        }
+        (async () => {
+            try {
+                const cartData = await fetchData(tokenACCESS);
+                dispatch(setCart(cartData.data.data));
+            } catch (error) {
+                try {
+                    const newTokenAccess = await axios.post(
+                        'http://localhost:2001/api/auth/token',
+                        {},
+                        {
+                            headers: {
+                                'Refresh-Token': tokenREFRESH,
+                            },
+                        },
+                    );
+                    localStorage.setItem('tokenACCESS', newTokenAccess.data.tokenACCESS);
+                    const newProfileData = await fetchData(newTokenAccess.data.tokenACCESS);
+                    dispatch(setCart(newProfileData.data.data));
+                } catch (error) {
+                    localStorage.removeItem('tokenACCESS');
+                    localStorage.removeItem('tokenREFRESH');
+                    navigate('/login', { replace: true });
+                }
+            }
+        })();
+    }, []);
+    if (isLoading) {
+        return (
+            <div className="px-[50px] mx-[-15px]">
+                <div className="flex items-center justify-center">
+                    <CircularProgress color="inherit" />
+                </div>
+            </div>
+        );
+    }
     return (
         <div className="pt-[108px] ">
             <div className="mx-[209px] mt-[30px] mb-[20px] px-[15px]">
@@ -26,9 +80,9 @@ function CartPage() {
                                 </div>
                             </div>
                             {/* {cart ? <div>hihi</div> : <EmptyCart />} */}
-                            {true ? (
+                            {cart ? (
                                 <div>
-                                    <Cart data={''} />
+                                    <Cart data={cart} />
                                 </div>
                             ) : (
                                 <EmptyCart />

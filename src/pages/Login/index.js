@@ -9,6 +9,7 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+
     const onLogin = async () => {
         try {
             if (email && password) {
@@ -18,7 +19,6 @@ function Login() {
                     success(result.data.message);
                     localStorage.setItem('tokenACCESS', result.data.tokenACCESS);
                     localStorage.setItem('tokenREFRESH', result.data.tokenREFRESH);
-                    localStorage.setItem('userID', result.data.userId);
 
                     setTimeout(() => {
                         navigate('/', { replace: true });

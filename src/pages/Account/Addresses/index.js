@@ -1,11 +1,11 @@
-import DefaultLayerAccount from '../DefaultLayerAccount';
+import DefaultLayerAccount from '../DefaultLayoutAccount';
 import Button from '~/components/Button';
 import Modal from './Modal';
 import { useState } from 'react';
 
 function Addresses() {
     const addresses = [];
-    const [isShow, setIsShow] = useState(true);
+    const [isShow, setIsShow] = useState(false);
     const handleShow = () => {
         setIsShow(true);
     };

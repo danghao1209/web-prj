@@ -6,7 +6,11 @@ function Cart({ data }) {
     return (
         <div className="mx-[-15px] flex">
             <div className="w-[75%] px-[15px]">
-                <ProInCart></ProInCart>
+                {data
+                    ? data.map((item, i) => {
+                          return <ProInCart data={item}></ProInCart>;
+                      })
+                    : ''}
             </div>
             <div className="w-[25%] px-[15px]">
                 <div className="w-full flex flex-col">

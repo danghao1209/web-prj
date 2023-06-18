@@ -1,4 +1,4 @@
-import DefaultLayerAccount from '../DefaultLayerAccount';
+import DefaultLayerAccount from '../DefaultLayoutAccount';
 import Button from '~/components/Button';
 
 function ChangePassword() {

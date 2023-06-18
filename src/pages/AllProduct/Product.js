@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function Product({ product, path }) {
     const [isHover, setIsHover] = useState(false);
     return (
-        <Link to={`../product/${product.id}`} key={product.id} className="px-[15px] flex flex-col relative">
+        <Link to={`../product/${product._id}`} key={product._id} className="px-[15px] flex flex-col relative">
             {isHover ? (
                 <div className="flex flex-col" onMouseOut={() => setIsHover(false)}>
                     <img src={`${path}${product.thumbnail[1]}`} alt={product.title} />

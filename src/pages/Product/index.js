@@ -1,12 +1,18 @@
+import _ from 'lodash';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhoneSquare } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
+import ToastMessage, { success, warning } from '~/components/Toast';
 
+import Button from '~/components/Button';
+import { setLoading, setProductData, setIndexColor, setSize, fetchDataAddCart } from '~/features/productSlice';
 import DropDown from './DropDown';
 import ItemProduct from './ItemProduct';
 import IfLikeSlick from './IfLikeSlick';
-import Button from '~/components/Button';
 import check from '~/asset/imgs/select-pro.png';
 
 function Product() {
@@ -39,29 +45,44 @@ function Product() {
             ],
         },
     ];
+    const { dataPro } = useSelector((state) => state.productsAll);
+    const { productData, indexColor, size, isLoading } = useSelector((state) => state.product);
+    const dispatch = useDispatch();
     const path = 'http://localhost:1209/';
 
-    const [data, setData] = useState();
-    const [indexColor, setIndexColor] = useState(0);
-    const [size, setSize] = useState();
-
+    const navigate = useNavigate();
     useEffect(() => {
         const currentUrl = window.location.href;
         const productId = currentUrl.split('/').pop();
         try {
-            const fetchData = async () => {
-                const result = await axios.get(`${path}api/product/${productId}`);
-                if (result.status === 200) {
-                    setData(result.data);
+            if (dataPro.products?.length > 0) {
+                dispatch(setLoading(true));
+                const product = _.find(dataPro.products, { _id: productId });
+                if (product) {
+                    dispatch(setProductData(product));
+                    dispatch(setLoading(false));
                 } else {
-                    console.log('lỗi');
+                    throw new Error('Loi');
                 }
-            };
-            fetchData();
+            } else {
+                dispatch(setLoading(true));
+                (async () => {
+                    const result = await axios.get(`${path}api/product/${productId}`);
+                    if (result.status === 200) {
+                        dispatch(setProductData(result.data));
+                    } else {
+                        console.log('lỗi');
+                    }
+                })();
+                dispatch(setLoading(false));
+            }
         } catch (error) {
             console.log('lỗi fecth');
+        } finally {
+            dispatch(setLoading(false));
         }
     }, []);
+
     let discount = (price, perDiscount) => {
         return (price * perDiscount) / 100;
     };
@@ -70,9 +91,60 @@ function Product() {
         let priceAfter = (price * perDiscount) / 100;
         return price - priceAfter;
     };
+
+    const addToCart = () => {
+        const tokenACCESS = localStorage.getItem('tokenACCESS');
+        const tokenREFRESH = localStorage.getItem('tokenREFRESH');
+
+        if (!tokenREFRESH) {
+            navigate('/login', { replace: true });
+            return;
+        }
+        (async () => {
+            try {
+                dispatch(fetchDataAddCart(tokenACCESS));
+                success('Thêm vào giỏ hàng thành công');
+                setTimeout(() => navigate('/cart', { replace: true }), 3000);
+            } catch (error) {
+                try {
+                    console.log(error.message);
+                    const newTokenAccess = await axios.post(
+                        'http://localhost:2001/api/auth/token',
+                        {},
+                        {
+                            headers: {
+                                'Refresh-Token': tokenREFRESH,
+                            },
+                        },
+                    );
+                    localStorage.setItem('tokenACCESS', newTokenAccess.data.tokenACCESS);
+                    dispatch(fetchDataAddCart(newTokenAccess.data.tokenACCESS));
+                    success('Thêm vào giỏ hàng thành công');
+                    setTimeout(() => navigate('/cart', { replace: true }), 3000);
+                } catch (err) {
+                    warning('Thêm vào giỏ hàng thất bại!');
+                    localStorage.removeItem('tokenACCESS');
+                    localStorage.removeItem('tokenREFRESH');
+
+                    navigate('/login', { replace: true });
+                }
+            }
+        })();
+    };
+
     const sizeChecked = ' border border-gray-900';
     const sizeSoldOut =
         'before:bg-[#aeaeae] before:w-[100%] before:h-[1px] before:absolute before:transform before:rotate-45 before:bottom-[50%] after:w-[100%] after:h-[1px] after:bg-[#aeaeae] after:absolute after:transform after:rotate-[-45deg] after:bottom-[50%]';
+
+    if (isLoading) {
+        return (
+            <div className="px-[50px] mx-[-15px]">
+                <div className="flex items-center justify-center">
+                    <CircularProgress color="inherit" />
+                </div>
+            </div>
+        );
+    }
     return (
         <div className="mt-[105px] pt-[50px] w-full">
             <div className="px-[50px] flex pb-[10px]">
@@ -87,30 +159,36 @@ function Product() {
 
                 <div className="w-[82%] flex px-[15px]">
                     <div className="w-[67%] px-[15px]">
-                        <ItemProduct data={data} indexColor={indexColor} path={path} />
+                        <ItemProduct data={productData} indexColor={indexColor} path={path} />
                     </div>
                     {/* {phần info} */}
                     <div className="px-[-15px] w-[33%]">
                         <div className="">
                             <div className="px-[15px]">
                                 <div className="mb-[5px] mt-[0px] text-[25px] text-[#707070] font-medium">
-                                    {data ? data.title : ''}
+                                    {productData ? productData.title : ''}
                                 </div>
 
                                 <div className="border-t border-b  border-dashed border-gray-300 py-[10px] mb-[10px]">
                                     <div className="flex items-center">
                                         <div className="tracking-[0.25px] font-bold text-[18px]">
-                                            {data ? priceLast(data.price, data.discountPercentage) : ''}₫
+                                            {productData
+                                                ? priceLast(productData.price, productData.discountPercentage)
+                                                : ''}
+                                            ₫
                                         </div>
                                         <div className="tracking-[0.25px] text-[14px] line-through ml-[10px]">
-                                            {data ? data.price : '0'}₫
+                                            {productData ? productData.price : '0'}₫
                                         </div>
                                     </div>
                                     <div>
                                         <div className="flex">
                                             Tiết kiệm:{' '}
                                             <div className="text-[#dc4e3f] font-medium">
-                                                {data ? discount(data.price, data.discountPercentage) : ''}₫
+                                                {productData
+                                                    ? discount(productData.price, productData.discountPercentage)
+                                                    : ''}
+                                                ₫
                                             </div>
                                         </div>
                                     </div>
@@ -122,8 +200,8 @@ function Product() {
                                             Màu sắc:{' '}
                                         </div>
                                         <div className="flex">
-                                            {data ? (
-                                                data.data.map((item, index) => {
+                                            {productData ? (
+                                                productData.data.map((item, index) => {
                                                     return (
                                                         <div
                                                             key={index}
@@ -131,7 +209,7 @@ function Product() {
                                                                 indexColor === index ? 'border border-gray-900' : ''
                                                             }`}
                                                             onClick={() => {
-                                                                setIndexColor(index);
+                                                                dispatch(setIndexColor(index));
                                                             }}
                                                         >
                                                             <img src={`${path}${item.images[0]}`} alt="" />
@@ -159,24 +237,24 @@ function Product() {
                                             Size:{' '}
                                         </div>
                                         <div className="flex">
-                                            {data
-                                                ? Object.keys(data.data[indexColor].size).map((item, index) => {
+                                            {productData
+                                                ? Object.keys(productData.data[indexColor].size).map((item, index) => {
                                                       return (
                                                           <div
                                                               className={`w-[50px] h-[50px] mb-[5px] mr-[5px] relative border border-[#f5f5f5] ${
-                                                                  data.data[indexColor].size[item] > 0
+                                                                  productData.data[indexColor].size[item] > 0
                                                                       ? ''
                                                                       : sizeSoldOut
                                                               }`}
                                                               onClick={() => {
-                                                                  if (data.data[indexColor].size[item] > 0) {
-                                                                      setSize(item);
+                                                                  if (productData.data[indexColor].size[item] > 0) {
+                                                                      dispatch(setSize(item));
                                                                   }
                                                               }}
                                                           >
                                                               <div
                                                                   className={`w-full h-full px-[5px] flex justify-center items-center font-semibold ${
-                                                                      data.data[indexColor].size[item] > 0 &&
+                                                                      productData.data[indexColor].size[item] > 0 &&
                                                                       item === size
                                                                           ? sizeChecked
                                                                           : ''
@@ -194,6 +272,9 @@ function Product() {
                                 <div className="mb-[15px] w-full">
                                     <div>
                                         <Button
+                                            onClick={() => {
+                                                addToCart();
+                                            }}
                                             className={` text-[#000] text-[16px] font-bold h-[50px] w-full bg-[#19ff3b] uppercase shadow-none hover:text-[#fff] hover:bg-[#dc4e3f]`}
                                             disabled={size ? false : true}
                                         >
@@ -213,8 +294,8 @@ function Product() {
 
                                     {/* dùng map render ra mô tả */}
 
-                                    {data
-                                        ? data.description.map((item, index) => {
+                                    {productData
+                                        ? productData.description.map((item, index) => {
                                               return (
                                                   <div className="text-[#3d3d3d] mb-[10px] font-semibold">
                                                       <div className="">{item}</div>
@@ -250,6 +331,7 @@ function Product() {
                     </div>
                 </div>
             </div>
+            <ToastMessage />
         </div>
     );
 }

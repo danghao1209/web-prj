@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function DefaultLayerAccount({ children }) {
+function DefaultLayoutAccount({ children }) {
     return (
         <div className="mt-[105px] mb-[250px]">
             <div className="py-[20px] mb-[30px]">
@@ -30,4 +30,4 @@ function DefaultLayerAccount({ children }) {
     );
 }
 
-export default DefaultLayerAccount;
+export default DefaultLayoutAccount;

@@ -1,14 +1,16 @@
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Button from '~/components/Button';
-import useDebounce from '~/hooks/useDebounce';
 
 function ProInCart({ data }) {
     const [quantity, setQuantity] = useState(1);
-    const debouncedValue = useDebounce(quantity, 500);
+    const { dataPro } = useSelector((state) => state.productsAll);
+    useEffect(() => {}, []);
+
     return (
         <div className="py-[15px] flex justify-center items-center border-t border-[#f5f5f5]">
             <div className="w-[25%] pr-[15px]">

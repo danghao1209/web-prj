@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import {
     faAngleDown,
     faAngleRight,
@@ -17,21 +17,12 @@ function Header() {
     const ref = useRef();
 
     const [valueSearch, setValueSearch] = useState('');
-    const [isLog, setIsLog] = useState(false);
 
     const MenuItem = [
         { title: 'TOP', children: ['T-Shirt', 'Shirt & Polo', 'Hoodie & Sweatshirt', 'Jacket'] },
         { title: 'BOTTOM', children: ['Pants', 'Shorts', 'Hoodie & Sweatshirt'] },
         { title: 'ACCESSORY', children: ['Bag & Backpack', 'Hat', 'Others'] },
     ];
-
-    useEffect(() => {
-        let token = localStorage.getItem('tokenUser');
-        if (token) {
-            console.log(token);
-            setIsLog(true);
-        }
-    }, [isLog]);
 
     const handleChange = (e) => {
         const valueSearch = e.target.value;
@@ -102,9 +93,8 @@ function Header() {
                         </Tippy>
                     </div>
                     <div className="py-5 pl-5 ml-[1.875vw]">
-                        <Link to={isLog ? '/account' : '/login'} className="flex items-center">
+                        <Link to="/account" className="flex items-center">
                             <FontAwesomeIcon icon={faUser} className="text-xl mr-1" />
-                            {console.log(isLog)}
                             <div className="">TÀI KHOẢN</div>
                         </Link>
                     </div>
