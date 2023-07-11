@@ -12,7 +12,7 @@ function Product({ product, path }) {
                             return <div className={`w-[15px] h-[15px] bg-[${color.color}] mr-[5px]`}></div>;
                         })}
                     </div>
-                    <div class="absolute bottom-0 w-[calc(100%-30px)]">
+                    <div className="absolute bottom-0 w-[calc(100%-30px)]">
                         <div className="h-[46px] px-[10px] border-[1px] border-black flex items-center justify-center ">
                             <div className="font-medium text-[13px]">Chi Tiết</div>
                         </div>

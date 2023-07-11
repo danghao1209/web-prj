@@ -7,21 +7,30 @@ import { DataAddress } from '~/asset/files/DataAdress';
 import { useNavigate } from 'react-router-dom';
 import ToastMessage, { success, error } from '~/components/Toast';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
+import { setAddressData } from '~/features/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
-function Modal({ isShow = false, handleClose, dataAdd }) {
+function ModalEditAdrress({ isShow = false, handleClose, addresses }) {
     const [data, setData] = useState();
-    const [tinh, setTinh] = useState({ id: '', index: -1 }); // cả 3 đều đang lưu index của vị trí nằm trong mảng. muốn post phải từ vị trí lấy ra data
-    const [huyen, setHuyen] = useState({ id: '', index: -1 });
-    const [xa, setXa] = useState({ id: '', index: -1 });
+    const { addressData } = useSelector((state) => state.user);
     const [name, setName] = useState();
     const [phone, setPhone] = useState();
     const [address, setAddress] = useState();
+    const [tinh, setTinh] = useState({ id: '', index: -1 }); // cả 3 đều đang lưu index của vị trí nằm trong mảng. muốn post phải từ vị trí lấy ra data
+    const [huyen, setHuyen] = useState({ id: '', index: -1 });
+    const [xa, setXa] = useState({ id: '', index: -1 });
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setData(DataAddress);
-    }, []);
-
+        setAddress(addressData?.address);
+        setName(addressData?.name);
+        setPhone(addressData?.phone);
+        setTinh(addressData?.tinh);
+        setHuyen(addressData?.huyen);
+        setXa(addressData?.xa);
+    }, [addressData]);
     const handleChangeTinh = (e) => {
         setTinh({ id: e.target.value, index: e.target.selectedIndex - 1 });
         setHuyen({ id: '', index: -1 });
@@ -48,7 +57,7 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
                 throw new Error('Vui lòng điền đầy đủ thông tin địa chỉ');
             }
             try {
-                await axios.post(
+                const result = await axios.post(
                     'http://localhost:1209/api/info/address',
                     {
                         phone,
@@ -65,14 +74,19 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
                     },
                 );
 
-                success('Đổi mật khẩu thành công');
+                success('Sửa địa chỉ thành công');
+                dispatch(setAddressData(result.data.data));
                 setTimeout(() => {
                     handleClose();
                 }, 2000);
             } catch (err) {
+                console.log(err.message);
+                if (err.message === 'Request failed with status code 400') {
+                    throw new Error('Mật khẩu cũ không chính xác');
+                }
                 const newTokenAccess = await GetNewAccessToken();
                 try {
-                    await axios.post(
+                    const result = await axios.post(
                         'http://localhost:1209/api/info/address',
                         {
                             phone,
@@ -88,14 +102,17 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
                             },
                         },
                     );
-
-                    success('Thêm địa chỉ thành công');
+                    dispatch(setAddressData(result.data.data));
+                    success('Sửa địa chỉ thành công');
+                    setTimeout(() => {
+                        handleClose();
+                    }, 2000);
                 } catch (e) {
                     throw new Error(e);
                 }
             }
         } catch (err) {
-            console.log(err.message);
+            console.log(error.message);
             error(err.message);
         }
     };
@@ -156,15 +173,16 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
                                         ----
                                     </option>
 
-                                    {data
-                                        ? data?.map((item, index) => {
-                                              return (
-                                                  <option value={item?.Id} key={index}>
-                                                      {item.Name}
-                                                  </option>
-                                              );
-                                          })
-                                        : ''}
+                                    {data &&
+                                        data.map((item, index) => (
+                                            <option
+                                                value={item?.Id}
+                                                key={index}
+                                                selected={tinh?.index === index ? true : false}
+                                            >
+                                                {item.Name}
+                                            </option>
+                                        ))}
                                 </select>
                             </div>
                             <div className="w-[30%]">
@@ -173,13 +191,17 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
                                     className="border border-[#e6e6e6] min-h-[40px] w-full rounded-[3px]"
                                     onChange={handleChangeHuyen}
                                 >
-                                    <option value="" hidden="" selected={huyen.index === -1 ? true : false}>
+                                    <option value="" hidden="" selected={huyen?.index === -1 ? true : false}>
                                         ----
                                     </option>
                                     {tinh?.id
                                         ? data[tinh.index]?.Districts?.map((item, index) => {
                                               return (
-                                                  <option value={item?.Id} key={index}>
+                                                  <option
+                                                      value={item?.Id}
+                                                      key={index}
+                                                      selected={huyen?.index === index ? true : false}
+                                                  >
                                                       {item.Name}
                                                   </option>
                                               );
@@ -194,14 +216,18 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
                                     id="ward"
                                     onChange={handleChangeXa}
                                 >
-                                    <option value="" hidden="" selected={xa.index === -1 ? true : false}>
+                                    <option value="" hidden="" selected={xa?.index === -1 ? true : false}>
                                         ----
                                     </option>
 
                                     {huyen?.id
                                         ? data[tinh.index]?.Districts[huyen.index]?.Wards?.map((item, index) => {
                                               return (
-                                                  <option value={item?.Id} key={index}>
+                                                  <option
+                                                      value={item?.Id}
+                                                      key={index}
+                                                      selected={xa?.index === index ? true : false}
+                                                  >
                                                       {item.Name}
                                                   </option>
                                               );
@@ -244,7 +270,7 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
                             onClick={addAdress}
                             className="bg-[#1c1c1c] font-medium px-[28px] h-[40px] text-[#fff] text-[12px] uppercase border-0 outline-0 transition-all hover:bg-[#fff] hover:text-[#1c1c1c] hover:border hover:border-[#1c1c1c] duration-450 ease-cubic"
                         >
-                            THÊM ĐỊA CHỈ
+                            Cập Nhật Địa Chỉ
                         </Button>
                     </div>
                 </div>
@@ -254,4 +280,4 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
     );
 }
 
-export default Modal;
+export default ModalEditAdrress;

@@ -43,7 +43,7 @@ function ChangePassword() {
                 if (err.message === 'Request failed with status code 400') {
                     throw new Error('Mật khẩu cũ không chính xác');
                 }
-                const newTokenAccess = GetNewAccessToken();
+                const newTokenAccess = await GetNewAccessToken();
                 try {
                     await axios.post(
                         'http://localhost:2001/api/auth/changepassword',

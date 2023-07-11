@@ -34,10 +34,10 @@ const publicRoutes = [
 
 const privateRoutes = [
     { path: config.routes.profile, component: Profile },
-    { path: config.routes.checkout, component: CheckOut },
     { path: config.routes.orders, component: Orders },
     { path: config.routes.changepassword, component: ChangePassword },
     { path: config.routes.addresses, component: Addresses },
 ];
+const nonDefaultLayoutRoutes = [{ path: config.routes.checkout, component: CheckOut }];
 
-export { publicRoutes, privateRoutes };
+export { publicRoutes, privateRoutes, nonDefaultLayoutRoutes };

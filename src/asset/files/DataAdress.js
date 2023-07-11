@@ -1,4 +1,4 @@
-export const dataAddress = [
+export const DataAddress = [
     {
         Id: '01',
         Name: 'Thành phố Hà Nội',

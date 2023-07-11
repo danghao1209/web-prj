@@ -75,7 +75,7 @@ export default function ProInCart({ data }) {
                         await handleQuantityChange(tokenACCESS);
                     } catch (error) {
                         try {
-                            const newTokenAccess = GetNewAccessToken();
+                            const newTokenAccess = await GetNewAccessToken();
                             await handleQuantityChange(newTokenAccess);
                         } catch (error) {
                             localStorage.removeItem('tokenACCESS');

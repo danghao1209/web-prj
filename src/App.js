@@ -4,7 +4,7 @@ import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { CircularProgress } from '@mui/material';
 
-import { publicRoutes, privateRoutes } from '~/routes';
+import { publicRoutes, privateRoutes, nonDefaultLayoutRoutes } from '~/routes';
 import DefaultLayout from '~/layouts';
 import NotFound from '~/pages/NotFound';
 import { setLoading, setDataPro } from '~/features/productsAllSlice';
@@ -95,6 +95,24 @@ function App() {
                     );
                 })}
 
+                {nonDefaultLayoutRoutes.map((route, index) => {
+                    const Page = route.component;
+                    const Layout = Fragment;
+
+                    return (
+                        <Route key={index} element={<PrivateWrapper />}>
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        </Route>
+                    );
+                })}
                 <Route
                     path="*"
                     element={
