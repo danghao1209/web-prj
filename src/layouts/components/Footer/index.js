@@ -15,9 +15,9 @@ import Button from '~/components/Button';
 function Footer() {
     return (
         <div className="flex flex-col font-medium justify-center mt-[60px]">
-            <div className="mx-[200px]">
-                <div className="flex justify-center mx-[-15px] box-border">
-                    <div className="w-[25%] px-[15px] ">
+            <div className="lg:mx-[200px]">
+                <div className=" lg:flex justify-center lg:mx-[-15px] box-border w-[full]">
+                    <div className="flex flex-col items-center justify-center w-[full] mb-[10px] lg:w-[25%] lg:px-[15px] lg:mr-[20px]">
                         <div className="pt-[4px] pb-[30px]">
                             <img
                                 src="https://bizweb.dktcdn.net/100/414/728/themes/867455/assets/logo.png?1675329140775"
@@ -36,7 +36,7 @@ function Footer() {
                         </div>
                     </div>
 
-                    <div className="w-[25%] font-semibold">
+                    <div className="flex flex-col ml-[10px] justify-center w-[full] lg:w-[25%] font-semibold">
                         <div className="flex items-center mb-[15px]">
                             <FontAwesomeIcon icon={faHouse} />
                             <div className="pl-[10px]">CLOWNZ STORE</div>
@@ -58,7 +58,7 @@ function Footer() {
                             <div className="pl-[10px]">090470 8362</div>
                         </div>
                     </div>
-                    <div className="w-[25%] ">
+                    <div className="flex flex-col items-center justify-center w-[full] lg:w-[25%]">
                         <div className="pt-[4px] pb-[30px] font-semibold">CHÍNH SÁCH</div>
                         <Link className="flex items-center mb-[15px] hover:text-red-600">
                             <FontAwesomeIcon icon={faX} className="mr-[5px]" />
@@ -73,9 +73,9 @@ function Footer() {
                             <div>CHÍNH SÁCH VẬN CHUYỂN</div>
                         </Link>
                     </div>
-                    <div className="w-[25%]">
+                    <div className="flex flex-col items-center justify-center w-[full] lg:w-[25%] ">
                         <div className="font-semibold pt-[4px] pb-[30px]">ĐĂNG KÝ NHẬN TIN</div>
-                        <div className="mb-[15px]">
+                        <div className="lg:mb-[15px] text-center">
                             Nhận thông tin sản phẩm mới nhất, tin khuyến mãi và nhiều hơn nữa.
                         </div>
                         <div className="flex h-[42px] mb-[8px]">
@@ -84,11 +84,11 @@ function Footer() {
                                 type="email"
                                 placeholder="Email của bạn"
                             />
-                            <Button className="px-[28px] bg-lime-600 text-white w-[144px] hover:transition-all">
+                            <Button className="px-[28px] bg-lime-600 text-white lg:w-[144px] ">
                                 <div className="font-semibold ">ĐĂNG KÝ</div>
                             </Button>
                         </div>
-                        <div>
+                        <div className="w-[full]">
                             <div className="flex mt-[20px] mb-[15px]">
                                 <div className="mr-[10px]">
                                     <img

@@ -16,7 +16,7 @@ export const fetchDataAddCart = createAsyncThunk('product/fetchDataAddCart', asy
         const response = await axios.post(
             'http://localhost:1209/api/cart',
             {
-                idProduct: productData._id,
+                id: productData._id,
                 data: { size, color: indexColor },
             },
             {

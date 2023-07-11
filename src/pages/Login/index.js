@@ -13,7 +13,7 @@ function Login() {
     const onLogin = async () => {
         try {
             if (email && password) {
-                const result = await axios.post('http://localhost:1209/api/login', { email, password });
+                const result = await axios.post('http://localhost:2001/api/auth/login', { email, password });
 
                 if (result.data.status === 1) {
                     success(result.data.message);
@@ -43,12 +43,14 @@ function Login() {
 
     return (
         <div className="mt-[105px] flex justify-center flex-col items-center ">
-            <div className="text-[26px] mt-[20px]">ĐĂNG NHẬP TÀI KHOẢN</div>
-            <div className="w-[45%] mb-[20px]">
-                <label className=" text-[14px]">EMAIL</label>
+            <div className="text-[26px] mt-[20px] lg:py-[30px]">ĐĂNG NHẬP TÀI KHOẢN</div>
+            <div className="w-[80%] lg:w-[45%] mb-[20px]">
+                <label className=" text-[14px] flex">
+                    EMAIL <div className="text-red-600">*</div>
+                </label>
                 <div className="mt-[10px]">
                     <input
-                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full h-[48px] p-[1px] text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        className="bg-[#f7f7f7] px-[20px] appearance-none border border-gray-200 rounded w-full h-[48px] p-[1px] text-gray-700 leading-tight focus:outline-none focus:bg-white"
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -56,11 +58,13 @@ function Login() {
                     />
                 </div>
             </div>
-            <div className="w-[45%]  mb-[20px]">
-                <label className="text-[14px]">MẬT KHẨU</label>
+            <div className="w-[80%] lg:w-[45%]  mb-[20px]">
+                <label className="text-[14px] flex">
+                    MẬT KHẨU <div className="text-red-600">*</div>
+                </label>
                 <div className="mt-[10px] ">
                     <input
-                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full h-[48px] p-[1px] text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                        className="bg-[#f7f7f7] px-[20px] appearance-none border border-gray-200 rounded w-full h-[48px] p-[1px] text-gray-700 leading-tight focus:outline-none focus:bg-white"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -70,14 +74,14 @@ function Login() {
             </div>
             <div>
                 <Button
-                    className="bg-black text-white text-[13px] px-[88px] font-medium h-[48px] mt-[15px] border border-black hover:opacity-75"
+                    className="bg-black text-white text-[13px] px-[60px] lg:px-[88px] font-medium h-[48px] mt-[15px] border border-black hover:opacity-75"
                     onClick={onLogin}
                 >
                     ĐĂNG NHẬP
                 </Button>
             </div>
             <div className="my-[15px]">
-                <Link to="/quenmatkhau">
+                <Link to="/forgotpassword">
                     <div className="text-red-600">Quên mật khẩu?</div>
                 </Link>
             </div>

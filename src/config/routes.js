@@ -11,5 +11,7 @@ const routes = {
     cart: '/cart',
     login: '/login',
     register: '/register',
+    checkout: '/checkout',
+    forgotpassword: '/forgotpassword',
 };
 export default routes;

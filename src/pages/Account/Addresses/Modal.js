@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Button from '~/components/Button';
+import { dataAddress } from './data';
 
 function Modal({ isShow = false, handleClose }) {
     const [data, setData] = useState('');
@@ -11,19 +12,7 @@ function Modal({ isShow = false, handleClose }) {
     const [xa, setXa] = useState('');
 
     useEffect(() => {
-        const fetchData = async () => {
-            const datafetched = await axios({
-                url: 'https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json',
-                method: 'GET',
-            });
-
-            setData(datafetched.data);
-        };
-
-        // gọi hàm
-        fetchData()
-            // bắt lỗi
-            .catch(console.error);
+        setData(dataAddress);
     }, []);
 
     const handleChangeTinh = (e) => {
@@ -56,8 +45,8 @@ function Modal({ isShow = false, handleClose }) {
 
     return (
         <div className={isShow ? '' : 'hidden'}>
-            <div className=" fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex z-[10] justify-center items-center top-0 left-0">
-                <div className="bg-white h-[480px] w-[710px] overflow-x-hidden overflow-y-auto mr-[17px] py-[15px] rounded-[5px]">
+            <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex z-[10] justify-center items-center top-0 left-0">
+                <div className="bg-white h-[480px] w-[710px] overflow-x-hidden overflow-y-auto lg:mr-[17px] py-[15px] rounded-[5px]">
                     <div className="flex justify-between font-bold text-[16px] border-b border-[#E0E0E0] mb-[8px]">
                         <div className="uppercase px-[34px] pb-[15px] flex justify-between items-center">
                             Thêm địa chỉ mới

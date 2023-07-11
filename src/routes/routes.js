@@ -16,6 +16,8 @@ import Profile from '~/pages/Account/Profile';
 import Orders from '~/pages/Account/Orders';
 import ChangePassword from '~/pages/Account/ChangePassword';
 import Addresses from '~/pages/Account/Addresses';
+import CheckOut from '~/pages/CheckOut';
+import ForgotPassword from '~/pages/ForgotPassword';
 
 //public routes
 const publicRoutes = [
@@ -27,10 +29,12 @@ const publicRoutes = [
     { path: config.routes.cart, component: Cart },
     { path: config.routes.login, component: Login },
     { path: config.routes.register, component: Register },
+    { path: config.routes.forgotpassword, component: ForgotPassword },
 ];
 
 const privateRoutes = [
     { path: config.routes.profile, component: Profile },
+    { path: config.routes.checkout, component: CheckOut },
     { path: config.routes.orders, component: Orders },
     { path: config.routes.changepassword, component: ChangePassword },
     { path: config.routes.addresses, component: Addresses },

@@ -1,5 +1,5 @@
 import Button from '~/components/Button';
-import myimg from '../../asset/imgs/select-pro.png';
+import myimg from '../../asset/images/select-pro.png';
 
 function InfoProduct({ data = [] }) {
     return (

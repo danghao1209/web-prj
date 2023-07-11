@@ -1,47 +1,132 @@
+import _ from 'lodash';
+import React, { memo, useEffect, useRef, useState } from 'react';
+import { useDebounce } from 'use-debounce';
+import { Link, useNavigate } from 'react-router-dom';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '~/components/Button';
+import { changeQuantity, deleteProduct } from '~/features/cartSlice';
+import GetNewAccessToken from '~/func/GetNewAccessToken';
 
-function ProInCart({ data }) {
-    const [quantity, setQuantity] = useState(1);
-    const { dataPro } = useSelector((state) => state.productsAll);
-    useEffect(() => {}, []);
+export default function ProInCart({ data }) {
+    const dispatch = useDispatch();
+    const [quantity, setQuantity] = useState(data.quantity);
+    const [dataPro, setDataPro] = useState();
+    const { dataProAll } = useSelector((state) => state.productsAll);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        (async () => {
+            const foundItem = _.find(dataProAll.products, { _id: data.id });
+            setDataPro(foundItem);
+        })();
+    }, [dataProAll]);
+
+    const handleQuantityChange = async () => {
+        try {
+            const tokenACCESS = localStorage.getItem('tokenACCESS');
+            const tokenREFRESH = localStorage.getItem('tokenREFRESH');
+            if (!tokenREFRESH) {
+                throw new Error('lỗi đổi số lượng');
+            }
+            if (quantity !== null) {
+                dispatch(changeQuantity({ id: data._id, quantity, tokenACCESS }));
+            }
+        } catch (error) {
+            localStorage.removeItem('tokenACCESS');
+            localStorage.removeItem('tokenREFRESH');
+            navigate('/login', { replace: true });
+        }
+    };
+
+    const handleProductDelete = () => {
+        try {
+            const tokenACCESS = localStorage.getItem('tokenACCESS');
+            const tokenREFRESH = localStorage.getItem('tokenREFRESH');
+            if (!tokenREFRESH) {
+                throw new Error('lỗi xoá sản phẩm');
+            }
+            dispatch(deleteProduct({ id: data._id, tokenACCESS }));
+        } catch (error) {
+            localStorage.removeItem('tokenACCESS');
+            localStorage.removeItem('tokenREFRESH');
+            navigate('/login', { replace: true });
+        }
+    };
+
+    const [value] = useDebounce(quantity, 2000);
+    const firstRender = useRef(true);
+    useEffect(() => {
+        if (firstRender.current) {
+            firstRender.current = false;
+        } else {
+            const tokenACCESS = localStorage.getItem('tokenACCESS');
+            const tokenREFRESH = localStorage.getItem('tokenREFRESH');
+
+            if (!tokenREFRESH) {
+                navigate('/login', { replace: true });
+                return;
+            }
+            if (quantity !== null) {
+                (async () => {
+                    try {
+                        await handleQuantityChange(tokenACCESS);
+                    } catch (error) {
+                        try {
+                            const newTokenAccess = GetNewAccessToken();
+                            await handleQuantityChange(newTokenAccess);
+                        } catch (error) {
+                            localStorage.removeItem('tokenACCESS');
+                            localStorage.removeItem('tokenREFRESH');
+                            navigate('/login', { replace: true });
+                        }
+                    }
+                })();
+            }
+        }
+    }, [value, dispatch]);
 
     return (
         <div className="py-[15px] flex justify-center items-center border-t border-[#f5f5f5]">
             <div className="w-[25%] pr-[15px]">
                 <Link>
                     <img
-                        src="https://bizweb.dktcdn.net/thumb/medium/100/414/728/products/ao-5-fa84a017-eb4b-4997-902f-fac7cb10b70e.jpg"
+                        src={`http://localhost:1209/${dataPro?.data[data.color].images[0]}`}
                         alt=""
                         className="max-h-[180px] max-w-auto h-auto"
                     />
                 </Link>
             </div>
             <div className="w-[75%] flex items-center">
-                <div className="px-[15px] w-[350px]">
+                <div className=" px-[15px] w-[350px]">
                     <div className="text-[#242424] text-[14px] font-medium mb-[7px]">
-                        <Link to={''} className="flex">
+                        <Link to={''} className="lg:flex">
                             {/* rendersize và màu ở đây */}
-                            <div>Poppy Flower Baby Tee - </div>
+                            <Link className="" to={`/product/${data._id}`}>
+                                {dataPro?.title} -{' '}
+                            </Link>
                             <div className="flex items-center">
                                 <div
-                                    className={`w-[15px] h-[15px] ml-[3px] mr-[5px] bg-[#ccc] border border-[#e5e5e5]`}
+                                    className={`w-[15px] h-[15px] ml-[3px] mr-[5px] ${
+                                        dataPro?.data[data.color].color
+                                    } border border-[#e5e5e5]`}
                                 ></div>{' '}
-                                / S
+                                / {data.size.toUpperCase()}
                             </div>
                         </Link>
                     </div>
                     <div>
-                        <Button className="text-[#dc4e3f] text-[13px] ">Xoá</Button>
+                        <Button className="text-[#dc4e3f] text-[13px]" onClick={() => handleProductDelete()}>
+                            Xoá
+                        </Button>
                     </div>
                 </div>
                 <div className="pr-[10px] w-[110px]">
-                    <div className="text-[#dc4e3f] text-[16px] font-medium mb-[5px]">299.000₫</div>
+                    <div className="text-[#dc4e3f] text-[14px] lg:text-[16px] font-medium mb-[5px]">
+                        {dataPro?.price}.000₫
+                    </div>
                 </div>
                 <div className="px-[15px] w-[120px] float-right flex justify-end items-center">
                     <div className="flex text-[14px] justify-center items-center">
@@ -74,5 +159,3 @@ function ProInCart({ data }) {
         </div>
     );
 }
-
-export default ProInCart;

@@ -2,9 +2,9 @@ import _ from 'lodash';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhoneSquare } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faPhoneSquare } from '@fortawesome/free-solid-svg-icons';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 import ToastMessage, { success, warning } from '~/components/Toast';
 
@@ -13,7 +13,9 @@ import { setLoading, setProductData, setIndexColor, setSize, fetchDataAddCart } 
 import DropDown from './DropDown';
 import ItemProduct from './ItemProduct';
 import IfLikeSlick from './IfLikeSlick';
-import check from '~/asset/imgs/select-pro.png';
+import check from '~/asset/images/select-pro.png';
+import GetNewAccessToken from '~/func/GetNewAccessToken';
+import IfLikeSlickPhone from './IfLikeSlickPhone';
 
 function Product() {
     const contents = [
@@ -45,19 +47,17 @@ function Product() {
             ],
         },
     ];
-    const { dataPro } = useSelector((state) => state.productsAll);
+    const { dataProAll } = useSelector((state) => state.productsAll);
     const { productData, indexColor, size, isLoading } = useSelector((state) => state.product);
     const dispatch = useDispatch();
     const path = 'http://localhost:1209/';
-
+    const { id } = useParams();
     const navigate = useNavigate();
     useEffect(() => {
-        const currentUrl = window.location.href;
-        const productId = currentUrl.split('/').pop();
         try {
-            if (dataPro.products?.length > 0) {
+            if (dataProAll.products?.length > 0) {
                 dispatch(setLoading(true));
-                const product = _.find(dataPro.products, { _id: productId });
+                const product = _.find(dataProAll.products, { _id: id });
                 if (product) {
                     dispatch(setProductData(product));
                     dispatch(setLoading(false));
@@ -67,7 +67,7 @@ function Product() {
             } else {
                 dispatch(setLoading(true));
                 (async () => {
-                    const result = await axios.get(`${path}api/product/${productId}`);
+                    const result = await axios.get(`${path}api/product/${id}`);
                     if (result.status === 200) {
                         dispatch(setProductData(result.data));
                     } else {
@@ -107,18 +107,8 @@ function Product() {
                 setTimeout(() => navigate('/cart', { replace: true }), 3000);
             } catch (error) {
                 try {
-                    console.log(error.message);
-                    const newTokenAccess = await axios.post(
-                        'http://localhost:2001/api/auth/token',
-                        {},
-                        {
-                            headers: {
-                                'Refresh-Token': tokenREFRESH,
-                            },
-                        },
-                    );
-                    localStorage.setItem('tokenACCESS', newTokenAccess.data.tokenACCESS);
-                    dispatch(fetchDataAddCart(newTokenAccess.data.tokenACCESS));
+                    const newTokenAccess = await GetNewAccessToken();
+                    dispatch(fetchDataAddCart(newTokenAccess));
                     success('Thêm vào giỏ hàng thành công');
                     setTimeout(() => navigate('/cart', { replace: true }), 3000);
                 } catch (err) {
@@ -146,38 +136,44 @@ function Product() {
         );
     }
     return (
-        <div className="mt-[105px] pt-[50px] w-full">
-            <div className="px-[50px] flex pb-[10px]">
+        <div className="lg:mt-[105px] lg:pt-[50px] w-full">
+            <div className="lg:px-[50px] lg:flex pb-[10px]">
                 {/* container trên */}
-                <div className="mx-[-15px] pb-[10px] flex w-[18%]">
-                    <div className="px-[15px] text-[1.07143em] sticky top-0 w-[100%]">
+                <div className="hidden lg:flex lg:mx-[-15px] lg:pb-[10px] w-[18%]">
+                    <div className="lg:px-[15px] text-[1.07143em] sticky top-0 w-[100%]">
                         {contents.map((content, index) => {
                             return <DropDown key={index++} content={content} />;
                         })}
                     </div>
                 </div>
 
-                <div className="w-[82%] flex px-[15px]">
-                    <div className="w-[67%] px-[15px]">
+                <div className="w-full lg:w-[82%] lg:flex lg:px-[15px]">
+                    <div className="w-full lg:w-[67%] lg:px-[15px]">
                         <ItemProduct data={productData} indexColor={indexColor} path={path} />
                     </div>
                     {/* {phần info} */}
-                    <div className="px-[-15px] w-[33%]">
+                    <div className="px-[-15px] lg:w-[33%]">
                         <div className="">
                             <div className="px-[15px]">
-                                <div className="mb-[5px] mt-[0px] text-[25px] text-[#707070] font-medium">
+                                <div className="flex items-center justify-center lg:justify-start lg:mb-[5px] lg:mt-[0px] text-[25px] text-[#707070] font-medium">
                                     {productData ? productData.title : ''}
                                 </div>
 
                                 <div className="border-t border-b  border-dashed border-gray-300 py-[10px] mb-[10px]">
-                                    <div className="flex items-center">
+                                    <div className="flex items-center flex-row-reverse justify-center lg:flex-row lg:justify-start">
                                         <div className="tracking-[0.25px] font-bold text-[18px]">
                                             {productData
                                                 ? priceLast(productData.price, productData.discountPercentage)
                                                 : ''}
                                             ₫
                                         </div>
-                                        <div className="tracking-[0.25px] text-[14px] line-through ml-[10px]">
+                                        <div className="lg:hidden flex items-center justify-center">
+                                            <FontAwesomeIcon
+                                                icon={faArrowRight}
+                                                className="text-[12px] mx-[5px] font-light"
+                                            />
+                                        </div>
+                                        <div className="tracking-[0.25px] text-[19px] line-through ml-[10px]">
                                             {productData ? productData.price : '0'}₫
                                         </div>
                                     </div>
@@ -318,8 +314,11 @@ function Product() {
                         Có thể bạn cũng thích
                     </div>
                 </div>
-                <div>
+                <div className="hidden lg:block">
                     <IfLikeSlick />
+                </div>
+                <div className="lg:hidden">
+                    <IfLikeSlickPhone />
                 </div>
             </div>
             {/* hotline */}

@@ -5,9 +5,9 @@ import Footer from '~/layouts/components/Footer';
 import React from 'react';
 function DefaultLayout({ children }) {
     return (
-        <div className="">
+        <div className="w-full">
             <Header />
-            <div className={''}>
+            <div className={'mt-[60px]'}>
                 <div className={''}>{children}</div>
             </div>
             <Footer />

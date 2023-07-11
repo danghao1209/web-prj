@@ -5,7 +5,7 @@ import { CircularProgress } from '@mui/material';
 
 import Button from '~/components/Button';
 import ToastMessage, { promise } from '~/components/Toast';
-import { setEmail, setPassword, setPhone, setLoading, setName } from '~/features/registerSlice';
+import { setEmail, setPassword, setPhone, setName } from '~/features/registerSlice';
 
 function Register() {
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ function Register() {
     const onRegister = async () => {
         try {
             let result = await promise(
-                axios.post('http://localhost:1209/api/register', { email, password, name, phone }),
+                axios.post('http://localhost:2001/api/auth/register', { email, password, name, phone }),
                 {
                     pending: 'Promise is pending',
                     success: 'Đăng ký thành công',
@@ -46,9 +46,9 @@ function Register() {
     }
     return (
         <div className="mt-[105px] flex justify-center flex-col items-center ">
-            <div className="text-[26px] mt-[20px]">ĐĂNG KÝ TÀI KHOẢN</div>
+            <div className="text-[26px] mt-[20px] lg:py-[30px]">ĐĂNG KÝ TÀI KHOẢN</div>
             <div className="text-[14px] mt-[10px]">Nếu chưa có tài khoản vui lòng đăng ký tại đây</div>
-            <div className="w-[35%] text-[14px]">
+            <div className="w-[80%] lg:w-[35%] text-[14px]">
                 <div className="mb-[25px]">
                     <label className="">HỌ TÊN</label>
                     <div className="mt-[10px]">

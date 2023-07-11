@@ -3,7 +3,7 @@ import SliderImg from './SliderImg';
 
 function HomePage() {
     return (
-        <div>
+        <div className="">
             <div>
                 <div className="flex justify-center">
                     <img

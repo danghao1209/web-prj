@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    dataPro: { products: [] },
+    dataProAll: { products: [] },
     isLoading: false,
 };
 
@@ -10,7 +10,7 @@ const productsAllSlice = createSlice({
     initialState,
     reducers: {
         setDataPro(state, action) {
-            state.dataPro = action.payload;
+            state.dataProAll = action.payload;
         },
         setLoading: (state, action) => {
             state.isLoading = action.payload;

@@ -3,20 +3,24 @@ import {
     faAngleDown,
     faAngleRight,
     faBagShopping,
+    faBars,
+    faChevronDown,
     faLocationDot,
     faMagnifyingGlass,
     faPhone,
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
 import Button from '~/components/Button';
 
 function Header() {
     const ref = useRef();
-
+    const navigate = useNavigate();
     const [valueSearch, setValueSearch] = useState('');
+    const [hiddenMenuBar, setHiddenMenuBar] = useState(true);
+    const [hiddenMenuPro, setHiddenMenuPro] = useState(true);
 
     const MenuItem = [
         { title: 'TOP', children: ['T-Shirt', 'Shirt & Polo', 'Hoodie & Sweatshirt', 'Jacket'] },
@@ -30,42 +34,133 @@ function Header() {
             setValueSearch(valueSearch);
         }
     };
-
     return (
-        <div className="font-sans font-medium text-sm px-[15px] fixed w-full z-10 top-0 bg-white">
+        <div className="flex flex-col justify-center font-sans font-medium text-sm px-[10px] lg:px-[15px] fixed w-full z-10 top-0 bg-white max-w-[100%] m-auto border border-[#ebebeb] shadow-sm">
             {/* header1 */}
-            <div className="flex justify-between items-center h-[64px] px-[50px] mx-[-15px]">
-                <div className="flex items-center basis-[33.3333%]">
-                    <div className="py-5 pr-5 mr-[1.875vw]">
-                        <Link to="/contact" className="flex items-center">
-                            <FontAwesomeIcon icon={faLocationDot} className="text-xl mr-1" />
-                            <div className=" cursor-pointer" title="ĐỊA CHỈ: VIỆT NAM">
-                                ĐỊA CHỈ: VIỆT NAM
+
+            <div className="flex justify-between items-center lg:h-[64px] lg:px-[50px] lg:mx-[-15px]">
+                <div className="lg:flex lg:items-center basis-[33.33333333%] ">
+                    <div>
+                        <div
+                            className="lg:hidden flex items-center justify-start"
+                            onClick={() => {
+                                setHiddenMenuBar(false);
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faBars} />
+                            <div className="ml-[5px]">Menu</div>
+                        </div>
+                    </div>
+                    <div
+                        className={`${
+                            hiddenMenuBar ? 'hidden' : ''
+                        } flex flex-col fixed top-0 left-0 w-[300px] h-[100vh] text-[#1c1c1c] bg-[#fff] z-[9999] shadow-none touch-manipulation lg:hidden`}
+                    >
+                        <Link
+                            to={'/'}
+                            className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
+                            onClick={() => setHiddenMenuBar(true)}
+                        >
+                            Trang Chủ
+                        </Link>
+                        <Link
+                            className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
+                            onClick={() => setHiddenMenuBar(true)}
+                        >
+                            NEW ARRIVAL
+                        </Link>
+                        <div className="border-b-[1px] border-[rgba(92,92,92,0.1)]">
+                            <div className="flex items-center justify-between">
+                                <Link
+                                    to={'/product/all'}
+                                    className="px-[20px] py-[10px] text-left align-top float-none "
+                                    onClick={() => setHiddenMenuBar(true)}
+                                >
+                                    Sản Phẩm
+                                </Link>
+                                <div
+                                    className="mr-[10px] p-[5px] text-[10px]"
+                                    onClick={() => setHiddenMenuPro(!hiddenMenuPro)}
+                                >
+                                    <FontAwesomeIcon icon={faChevronDown} />
+                                </div>
                             </div>
+                            <div className={`${hiddenMenuPro ? 'hidden' : ''} mb-[10px]`}>
+                                {MenuItem.map((item, index) => {
+                                    return (
+                                        <div className="text-[12px] font-normal px-[15px] py-[5px] ml-[30px] border-b-[1px] border-[#f7f7f7]">
+                                            <Link to={`/${item.title.toLowerCase()}`}>{item.title}</Link>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
+                        <Link
+                            className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
+                            onClick={() => setHiddenMenuBar(true)}
+                        >
+                            ALL SALE
+                        </Link>
+                        <Link
+                            to="/contact"
+                            className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
+                            onClick={() => setHiddenMenuBar(true)}
+                        >
+                            Về Chúng Tôi
+                        </Link>
+                        <Link
+                            className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
+                            onClick={() => setHiddenMenuBar(true)}
+                        >
+                            Blog
+                        </Link>
+                        <Link
+                            className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
+                            onClick={() => setHiddenMenuBar(true)}
+                        >
+                            Liên Hệ
                         </Link>
                     </div>
-                    <div className="py-5 pr-5">
-                        <Link to="/contact" className="flex items-center">
-                            <FontAwesomeIcon icon={faPhone} className="text-xl mr-1" />
-                            <div className="cursor-pointer" title="SĐT: 0904708362">
-                                SĐT: 0904708362
-                            </div>
-                        </Link>
+                    <div
+                        className={`${
+                            hiddenMenuBar ? 'hidden' : ''
+                        } fixed top-0 left-0 right-0 bottom-0 z-[999] bg-[rgba(0,0,0,0.55)] opacity-100 lg:hidden`}
+                        onClick={() => setHiddenMenuBar(true)}
+                    ></div>
+
+                    <div className="hidden lg:flex lg:items-center">
+                        <div className="py-5 pr-5 mr-[1.875vw]">
+                            <Link to="/contact" className="flex items-center">
+                                <FontAwesomeIcon icon={faLocationDot} className="text-xl mr-1" />
+                                <div className="cursor-pointer " title="ĐỊA CHỈ: VIỆT NAM">
+                                    ĐỊA CHỈ: VIỆT NAM
+                                </div>
+                            </Link>
+                        </div>
+                        <div className="py-5 pr-5">
+                            <Link to="/contact" className="flex items-center">
+                                <FontAwesomeIcon icon={faPhone} className="text-xl mr-1" />
+                                <div className="cursor-pointer" title="SĐT: 0904708362">
+                                    SĐT: 0904708362
+                                </div>
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex">
+                <div className=" max-w-[33.33333%] ml-[20px] basis-[33.3333%]">
                     <Link to="/">
                         <img
-                            src="//bizweb.dktcdn.net/100/414/728/themes/867455/assets/logo.png?1675329140775"
-                            className="h-9 m-auto leading-[23.8px] basis-[33.3333%]"
+                            src="https://bizweb.dktcdn.net/100/414/728/themes/867455/assets/logo.png?1685614743610"
+                            className="m-auto leading-[23.8px] max-w-[100%]  h-auto "
                             alt="Logo"
                         />
                     </Link>
                 </div>
 
-                <div className="flex items-center ml-[1.875vw] basis-[33.3333%] justify-end">
-                    <div className="">
+                <div className="flex items-center ml-[1.875vw] basis-[33.3333%] justify-end ">
+                    <div className="px-[5px]">
                         <Tippy
                             interactive
                             delay={[0, 1000]}
@@ -75,40 +170,46 @@ function Header() {
                                 <div
                                     tabIndex="-1"
                                     {...attrs}
-                                    className="w-[250px] h-[62px] p-[10px] border border-solid border-gray-200 flex"
+                                    className="w-[220px] h-[50px] lg:w-[250px] lg:h-[62px] p-[10px] border border-solid border-gray-200 flex bg-[#fff]"
                                 >
                                     <input
                                         value={valueSearch}
                                         placeholder="Nhập từ khoá"
-                                        className="p-[10px] rounded-l-[4px]  border border-solid border-gray-200"
+                                        className="p-[10px] rounded-l-[4px]  border border-solid border-gray-200 focus:outline-none"
                                         onChange={handleChange}
                                     />
-                                    <Button className="bg-neutral-400">
-                                        <div>Tìm kiếm</div>
+                                    <Button
+                                        className="bg-neutral-400 w-[40px]"
+                                        onClick={() => {
+                                            navigate(valueSearch ? `/search?q=${valueSearch}` : '');
+                                        }}
+                                    >
+                                        <div className="text-[10px] lg:text-[14px]">Tìm kiếm</div>
                                     </Button>
                                 </div>
                             )}
                         >
-                            <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xl" />
+                            <FontAwesomeIcon icon={faMagnifyingGlass} className="lg:text-xl" />
                         </Tippy>
                     </div>
-                    <div className="py-5 pl-5 ml-[1.875vw]">
+                    <div className="py-5 px-[5px] lg:pl-5 lg:ml-[1.875vw]">
                         <Link to="/account" className="flex items-center">
-                            <FontAwesomeIcon icon={faUser} className="text-xl mr-1" />
-                            <div className="">TÀI KHOẢN</div>
+                            <FontAwesomeIcon icon={faUser} className="lg:text-xl mr-1" />
+                            <div className="hidden lg:block">TÀI KHOẢN</div>
                         </Link>
                     </div>
-                    <div className="py-5 pr-5 ml-[1.875vw]">
+                    <div className="px-[5px] py-5 lg:pr-5 lg:ml-[1.875vw]">
                         <Link to="/cart" className="flex items-center">
-                            <div className="mr-1">GIỎ HÀNG</div>
-                            <FontAwesomeIcon icon={faBagShopping} className="text-xl" />
+                            <div className="mr-1 hidden lg:block">GIỎ HÀNG</div>
+                            <FontAwesomeIcon icon={faBagShopping} className="lg:text-xl" />
                         </Link>
                     </div>
                 </div>
             </div>
+
             {/* header 2 */}
-            <div className="items-center ">
-                <div className=" h-[44pxs] flex text-center m-0 justify-center">
+            <div className=" ">
+                <div className="hidden lg:h-[44pxs] lg:flex lg:text-center lg:m-0 lg:justify-center">
                     <Link to="/">
                         <div className="px-[20px] py-[10px]">TRANG CHỦ</div>
                     </Link>

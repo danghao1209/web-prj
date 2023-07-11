@@ -1,19 +1,26 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setLoading, setCart, setQuanlity, setError } from '~/features/cartSlice';
+import { setCart, getDataProInCart } from '~/features/cartSlice';
 import EmptyCart from './EmptyCart';
 import Cart from './Cart';
 import { CircularProgress } from '@mui/material';
 
-const fetchData = (tokenACCESS) =>
-    axios.get('http://localhost:1209/api/cart', {
-        headers: {
-            Authorization: tokenACCESS,
-        },
-    });
+const getCart = async (tokenACCESS) => {
+    try {
+        const data = await axios.get('http://localhost:1209/api/cart', {
+            headers: {
+                Authorization: tokenACCESS,
+            },
+        });
+        return data;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
 function CartPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -29,7 +36,7 @@ function CartPage() {
         }
         (async () => {
             try {
-                const cartData = await fetchData(tokenACCESS);
+                const cartData = await getCart(tokenACCESS);
                 dispatch(setCart(cartData.data.data));
             } catch (error) {
                 try {
@@ -43,8 +50,8 @@ function CartPage() {
                         },
                     );
                     localStorage.setItem('tokenACCESS', newTokenAccess.data.tokenACCESS);
-                    const newProfileData = await fetchData(newTokenAccess.data.tokenACCESS);
-                    dispatch(setCart(newProfileData.data.data));
+                    const newCart = await getCart(newTokenAccess.data.tokenACCESS);
+                    dispatch(setCart(newCart.data.data));
                 } catch (error) {
                     localStorage.removeItem('tokenACCESS');
                     localStorage.removeItem('tokenREFRESH');
@@ -53,6 +60,7 @@ function CartPage() {
             }
         })();
     }, []);
+
     if (isLoading) {
         return (
             <div className="px-[50px] mx-[-15px]">
@@ -62,14 +70,15 @@ function CartPage() {
             </div>
         );
     }
+
     return (
-        <div className="pt-[108px] ">
-            <div className="mx-[209px] mt-[30px] mb-[20px] px-[15px]">
-                <div className="mx-[-15px]">
-                    <div className="px-[15px]">
+        <div className="pt-[20px] pb-[10px] lg:pt-[48px] lg:[pb-[0px]]">
+            <div className="lg:mx-[209px] lg:mt-[30px] lg:mb-[20px] lg:px-[15px]">
+                <div className="lg:mx-[-15px]">
+                    <div className="lg:px-[15px]">
                         <div className="mb-[10px]">
-                            <div className="mx-[-15px]">
-                                <div className="px-[15px] w-full flex items-center relative">
+                            <div className="lg:mx-[-15px]">
+                                <div className="hidden lg:flex lg:px-[15px] w-full  items-center relative">
                                     <div className="uppercase text-[26px] text-[#1c1c1c] leading-[28px] m-[0] tracking-[2.4px]">
                                         Giỏ hàng
                                     </div>
@@ -78,11 +87,13 @@ function CartPage() {
                                         {/* phần này sau có thể thêm đếm số sản phẩm vào */}
                                     </div>
                                 </div>
+                                <div className="uppercase font-medium ml-[5px] lg:mr-[0px] lg:hidden">
+                                    Giỏ hàng của bạn
+                                </div>
                             </div>
-                            {/* {cart ? <div>hihi</div> : <EmptyCart />} */}
-                            {cart ? (
+                            {cart?.totalQuanlity > 0 ? (
                                 <div>
-                                    <Cart data={cart} />
+                                    <Cart />
                                 </div>
                             ) : (
                                 <EmptyCart />
