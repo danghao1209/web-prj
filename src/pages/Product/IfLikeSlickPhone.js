@@ -19,7 +19,7 @@ function IfLikeSlickPhone() {
     return (
         <Slider {...settings}>
             <div className="px-[15px] flex flex-col">
-                <div className="flex flex-col">
+                <div className="flex flex-col items-center justify-center">
                     <div className="">
                         <img
                             src="https://bizweb.dktcdn.net/thumb/large/100/414/728/products/quan-dai2.jpg?v=1672820890000"

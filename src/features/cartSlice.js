@@ -6,14 +6,14 @@ import _ from 'lodash';
 const initialState = {
     cart: null,
     proInCart: null,
-    totalPrice: null,
+    priceCart: null,
     isLoading: false,
     error: null,
 };
 
 const changeQuantity = createAsyncThunk('cart/changeQuantity', async ({ id, quantity, tokenACCESS }) => {
     try {
-        const response = await axios.put(
+        const response = await axios.patch(
             'http://localhost:1209/api/cart',
             { data: { id, quantity } },
             {
@@ -26,7 +26,7 @@ const changeQuantity = createAsyncThunk('cart/changeQuantity', async ({ id, quan
     } catch (error) {
         try {
             const newTokenAccess = await GetNewAccessToken();
-            const response = await axios.put(
+            const response = await axios.patch(
                 'http://localhost:1209/api/cart',
                 { data: { id, quantity } },
                 {
@@ -83,8 +83,8 @@ const cartSlice = createSlice({
         setCart: (state, action) => {
             state.cart = action.payload;
         },
-        setTotalPrice: (state, action) => {
-            state.totalPrice = action.payload;
+        setPriceCart: (state, action) => {
+            state.priceCart = action.payload;
         },
         setError: (state, action) => {
             state.error = action.payload;
@@ -117,7 +117,7 @@ const cartSlice = createSlice({
     },
 });
 
-export const { setLoading, setCart, setError, setTotalPrice, setDataProInCart } = cartSlice.actions;
+export const { setLoading, setCart, setError, setPriceCart, setDataProInCart } = cartSlice.actions;
 
 export { changeQuantity, deleteProduct };
 

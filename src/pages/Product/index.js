@@ -58,6 +58,7 @@ function Product() {
             if (dataProAll.products?.length > 0) {
                 dispatch(setLoading(true));
                 const product = _.find(dataProAll.products, { _id: id });
+                console.log(product);
                 if (product) {
                     dispatch(setProductData(product));
                     dispatch(setLoading(false));
@@ -137,7 +138,7 @@ function Product() {
     }
     return (
         <div className="lg:mt-[105px] lg:pt-[50px] w-full">
-            <div className="lg:px-[50px] lg:flex pb-[10px]">
+            <div className="lg:px-[50px] lg:flex pb-[10px] justify-center">
                 {/* container trên */}
                 <div className="hidden lg:flex lg:mx-[-15px] lg:pb-[10px] w-[18%]">
                     <div className="lg:px-[15px] text-[1.07143em] sticky top-0 w-[100%]">
@@ -147,7 +148,7 @@ function Product() {
                     </div>
                 </div>
 
-                <div className="w-full lg:w-[82%] lg:flex lg:px-[15px]">
+                <div className="w-full lg:w-[82%] lg:flex lg:px-[15px] justify-center lg:justify-start ">
                     <div className="w-full lg:w-[67%] lg:px-[15px]">
                         <ItemProduct data={productData} indexColor={indexColor} path={path} />
                     </div>
@@ -286,7 +287,7 @@ function Product() {
                                     />
                                 </div>
                                 <div className="mb-[20px] text-[16px]">
-                                    <div className="mb-[20px] text-[#707070] font-bold">Mô tả</div>
+                                    <div className="mb-[20px] text-[#707070] font-bold w">Mô tả</div>
 
                                     {/* dùng map render ra mô tả */}
 
@@ -308,22 +309,22 @@ function Product() {
 
             {/* container dưới */}
             {/* phần có thể b cũng thích */}
-            <div className="mt-[20px] mx-[-15px] mb-[10px]">
+            <div className="mt-[20px] mx-[-15px] mb-[10px] max-w-full">
                 <div className="mb-[50px] flex text-center justify-center items-center">
                     <div className="uppercase text-[26px] text-[#1c1c1c] leading-[28px] tracking-[2.4px] relative before:absolute before:w-[50px] before:left-[50%] before:bottom-[-15px] before:h-[2px] before:bg-[#000] before:ml-[-25px]">
                         Có thể bạn cũng thích
                     </div>
                 </div>
-                <div className="hidden lg:block">
+                <div className="hidden lg:block px-[50px] max-w-full">
                     <IfLikeSlick />
                 </div>
-                <div className="lg:hidden">
+                <div className="lg:hidden max-w-full mx-auto">
                     <IfLikeSlickPhone />
                 </div>
             </div>
             {/* hotline */}
             <div className="py-[23px] bg-[#F3F3F3] rounded-[5px]">
-                <div className="flex items-center ml-[10px]">
+                <div className="flex items-center ml-[10px] lg:text-[16px]">
                     <FontAwesomeIcon icon={faPhoneSquare} className="text-[30px] mr-[5px]" />
                     <div className="uppercase flex">
                         Hotline đặt hàng: <div className="text-[#FF0000]">09047 08362</div>

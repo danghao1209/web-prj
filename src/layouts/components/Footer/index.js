@@ -14,7 +14,7 @@ import Button from '~/components/Button';
 
 function Footer() {
     return (
-        <div className="flex flex-col font-medium justify-center mt-[60px]">
+        <div className="flex flex-col font-medium justify-center mt-[60px] max-w-full">
             <div className="lg:mx-[200px]">
                 <div className=" lg:flex justify-center lg:mx-[-15px] box-border w-[full]">
                     <div className="flex flex-col items-center justify-center w-[full] mb-[10px] lg:w-[25%] lg:px-[15px] lg:mr-[20px]">
@@ -120,7 +120,7 @@ function Footer() {
                     </div>
                 </div>
             </div>
-            <div className="w-[100%] pt-[5px] flex justify-center font-light border-t border-[#f5f5f5]">
+            <div className="max-w-[100%] lg:text-[14px] text-[12px] pt-[5px] flex justify-center items-center font-light border-t border-[#f5f5f5]">
                 <div>
                     <FontAwesomeIcon icon={faCopyright} />
                 </div>

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { Link, useNavigate } from 'react-router-dom';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -99,12 +99,12 @@ export default function ProInCart({ data }) {
                     />
                 </Link>
             </div>
-            <div className="w-[75%] flex items-center">
-                <div className=" px-[15px] w-[350px]">
-                    <div className="text-[#242424] text-[14px] font-medium mb-[7px]">
-                        <Link to={''} className="lg:flex">
+            <div className="w-[75%] flex flex-col lg:flex-row items-center">
+                <div className="lg:px-[15px] w-full lg:w-[350px] flex items-center justify-between lg:justify-center lg:block">
+                    <div className="text-[#242424] text-[14px] font-medium mb-[7px] w-[80%]">
+                        <Link to={''} className="flex  items-center justify-center lg:justify-start">
                             {/* rendersize và màu ở đây */}
-                            <Link className="" to={`/product/${data._id}`}>
+                            <Link className="" to={`/product/${data.id}`}>
                                 {dataPro?.title} -{' '}
                             </Link>
                             <div className="flex items-center">
@@ -117,13 +117,13 @@ export default function ProInCart({ data }) {
                             </div>
                         </Link>
                     </div>
-                    <div>
+                    <div className="flex items-center justify-center w-[20%] lg:w-full lg:justify-start">
                         <Button className="text-[#dc4e3f] text-[13px]" onClick={() => handleProductDelete()}>
                             Xoá
                         </Button>
                     </div>
                 </div>
-                <div className="pr-[10px] w-[110px]">
+                <div className="pr-[10px] w-[110px] flex items-center justify-center py-[5px] lg:py-0">
                     <div className="text-[#dc4e3f] text-[14px] lg:text-[16px] font-medium mb-[5px]">
                         {dataPro?.price}.000₫
                     </div>

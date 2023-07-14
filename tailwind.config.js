@@ -13,6 +13,9 @@ module.exports = {
                 lg: '18px',
                 xl: '20px',
             },
+            maxHeight: {
+                'calc-viewport-minus-480': 'calc(100vh - 480px)',
+            },
         },
     },
     plugins: [],

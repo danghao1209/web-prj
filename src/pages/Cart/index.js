@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setCart, getDataProInCart } from '~/features/cartSlice';
+import { setCart } from '~/features/cartSlice';
 import EmptyCart from './EmptyCart';
 import Cart from './Cart';
 import { CircularProgress } from '@mui/material';
