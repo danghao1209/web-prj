@@ -18,7 +18,7 @@ function IfLikeSlickPhone() {
     };
     return (
         <Slider {...settings}>
-            <div className="px-[15px] flex flex-col">
+            <div className="px-[15px] flex flex-col z-2">
                 <div className="flex flex-col items-center justify-center">
                     <div className="">
                         <img
@@ -35,7 +35,7 @@ function IfLikeSlickPhone() {
                     </div>
                 </div>
             </div>
-            <div className="px-[15px] flex flex-col">
+            <div className="px-[15px] flex flex-col z-2">
                 <div className="flex flex-col">
                     <div className="">
                         <img
@@ -52,7 +52,7 @@ function IfLikeSlickPhone() {
                     </div>
                 </div>
             </div>{' '}
-            <div className="px-[15px] flex flex-col">
+            <div className="px-[15px] flex flex-col z-2">
                 <div className="flex flex-col">
                     <div className="">
                         <img
@@ -69,7 +69,7 @@ function IfLikeSlickPhone() {
                     </div>
                 </div>
             </div>{' '}
-            <div className="px-[15px] flex flex-col">
+            <div className="px-[15px] flex flex-col z-2">
                 <div className="flex flex-col">
                     <div className="">
                         <img
@@ -78,7 +78,7 @@ function IfLikeSlickPhone() {
                         />
                     </div>
                     <div>
-                        <div className="mt-[20px] mb-[5px] text-[12px] text-ellipsis font-utm_aptima ">
+                        <div className="mt-[20px] mb-[5px] text-[12px] text-ellipsis font-utm_aptima z-2">
                             CLOWNZ BASIC SWEAT PANTS
                         </div>
                         <div className="text-[14px]">PANTS & JEANS</div>

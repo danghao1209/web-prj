@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import SliderImg from './SliderImg';
 
 function HomePage() {
@@ -35,7 +34,7 @@ function HomePage() {
                 </div>
             </div>
             <div>
-                <div className="py-[40px]">
+                <div className="py-[40px] z-2">
                     <SliderImg />
                 </div>
             </div>

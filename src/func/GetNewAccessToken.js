@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { authApi } from '~/asset/path';
 
 const GetNewAccessToken = async () => {
     const navigate = useNavigate();
@@ -7,7 +8,7 @@ const GetNewAccessToken = async () => {
 
     try {
         const newTokenAccess = await axios.post(
-            'http://localhost:2001/api/auth/token',
+            `${authApi}/token`,
             {},
             {
                 headers: {

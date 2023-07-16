@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { pathApi } from '~/asset/path';
 
 function ListItemCheckOut({ data }) {
     const [dataPro, setDataPro] = useState();
@@ -18,7 +19,7 @@ function ListItemCheckOut({ data }) {
             <div className="relative w-[10%] h-[50px] border rounded-[4px]">
                 {console.log(dataPro)}
                 <img
-                    src={`http://localhost:1209/${dataPro?.data[data.color].images[0]}`}
+                    src={`${pathApi}/${dataPro?.data[data.color].images[0]}`}
                     alt=""
                     className="w-[40px] h-[48px] mx-auto"
                 />

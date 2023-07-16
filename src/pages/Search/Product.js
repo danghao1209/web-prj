@@ -6,10 +6,10 @@ function Product({ product, path }) {
         <Link to={`../product/${product._id}`} key={product._id} className="px-[15px] flex flex-col relative">
             {isHover ? (
                 <div className="flex flex-col" onMouseOut={() => setIsHover(false)}>
-                    <img src={`${path}${product.thumbnail[1]}`} alt={product.title} />
+                    <img src={`${path}/${product.thumbnail[1]}`} alt={product?.title} />
                     <div className="absolute lg:bottom-[120px] lg:right-[20px] flex">
-                        {product.data.map((color) => {
-                            return <div className={`w-[15px] h-[15px] bg-[${color.color}] mr-[5px]`}></div>;
+                        {product?.data?.map((color) => {
+                            return <div className={`w-[15px] h-[15px] bg-[${color?.color}] mr-[5px]`}></div>;
                         })}
                     </div>
                     <div className="absolute bottom-0 w-[calc(100%-30px)]">
@@ -21,21 +21,21 @@ function Product({ product, path }) {
             ) : (
                 <div className="flex flex-col">
                     <img
-                        src={`${path}${product.thumbnail[0]}`}
-                        alt={product.title}
+                        src={`${path}/${product?.thumbnail[0]}`}
+                        alt={product?.title}
                         onMouseOver={() => setIsHover(true)}
                     />
                     <div className="absolute bottom-[105px] lg:bottom-[120px] right-[20px] flex">
-                        {product.data.map((color) => {
-                            return <div className={`w-[15px] h-[15px] bg-[${color.color}] mr-[5px]`}></div>;
+                        {product?.data?.map((color) => {
+                            return <div className={`w-[15px] h-[15px] bg-[${color?.color}] mr-[5px]`}></div>;
                         })}
                     </div>
                     <div>
                         <div className="mt-[20px] mb-[5px] text-[14px] lg:text-[20px] text-ellipsis font-utm_aptima truncate">
-                            {product.title}
+                            {product?.title}
                         </div>
-                        <div className="text-[12px] lg:text-[16px]">{product.category.toUpperCase()}</div>
-                        <div className="text-[12px] lg:text-[16px] font-medium">{product.price}.000₫</div>
+                        <div className="text-[12px] lg:text-[16px]">{product?.category?.toUpperCase()}</div>
+                        <div className="text-[12px] lg:text-[16px] font-medium">{product?.price}.000₫</div>
                     </div>
                 </div>
             )}

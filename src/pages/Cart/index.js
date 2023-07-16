@@ -7,10 +7,12 @@ import { setCart } from '~/features/cartSlice';
 import EmptyCart from './EmptyCart';
 import Cart from './Cart';
 import { CircularProgress } from '@mui/material';
+import GetNewAccessToken from '~/func/GetNewAccessToken';
+import { pathApi } from '~/asset/path';
 
 const getCart = async (tokenACCESS) => {
     try {
-        const data = await axios.get('http://localhost:1209/api/cart', {
+        const data = await axios.get(`${pathApi}/cart`, {
             headers: {
                 Authorization: tokenACCESS,
             },
@@ -40,15 +42,7 @@ function CartPage() {
                 dispatch(setCart(cartData.data.data));
             } catch (error) {
                 try {
-                    const newTokenAccess = await axios.post(
-                        'http://localhost:2001/api/auth/token',
-                        {},
-                        {
-                            headers: {
-                                'Refresh-Token': tokenREFRESH,
-                            },
-                        },
-                    );
+                    const newTokenAccess = await GetNewAccessToken();
                     localStorage.setItem('tokenACCESS', newTokenAccess.data.tokenACCESS);
                     const newCart = await getCart(newTokenAccess.data.tokenACCESS);
                     dispatch(setCart(newCart.data.data));

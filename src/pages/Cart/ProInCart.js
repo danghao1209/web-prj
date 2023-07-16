@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '~/components/Button';
 import { changeQuantity, deleteProduct } from '~/features/cartSlice';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
+import ToastMessage from '~/components/Toast';
+import { pathApi } from '~/asset/path';
 
 export default function ProInCart({ data }) {
     const dispatch = useDispatch();
@@ -34,10 +36,12 @@ export default function ProInCart({ data }) {
             if (quantity !== null) {
                 dispatch(changeQuantity({ id: data._id, quantity, tokenACCESS }));
             }
-        } catch (error) {
-            localStorage.removeItem('tokenACCESS');
-            localStorage.removeItem('tokenREFRESH');
-            navigate('/login', { replace: true });
+        } catch (err) {
+            setTimeout(() => {
+                localStorage.removeItem('tokenACCESS');
+                localStorage.removeItem('tokenREFRESH');
+                navigate('/login', { replace: true });
+            }, 2000);
         }
     };
 
@@ -73,7 +77,7 @@ export default function ProInCart({ data }) {
                 (async () => {
                     try {
                         await handleQuantityChange(tokenACCESS);
-                    } catch (error) {
+                    } catch (err) {
                         try {
                             const newTokenAccess = await GetNewAccessToken();
                             await handleQuantityChange(newTokenAccess);
@@ -87,13 +91,12 @@ export default function ProInCart({ data }) {
             }
         }
     }, [value, dispatch]);
-
     return (
         <div className="py-[15px] flex justify-center items-center border-t border-[#f5f5f5]">
             <div className="w-[25%] pr-[15px]">
                 <Link>
                     <img
-                        src={`http://localhost:1209/${dataPro?.data[data.color].images[0]}`}
+                        src={`${pathApi}/public/${dataPro?.data[data.color].images[0]}`}
                         alt=""
                         className="max-h-[180px] max-w-auto h-auto"
                     />
@@ -156,6 +159,7 @@ export default function ProInCart({ data }) {
                     </div>
                 </div>
             </div>
+            <ToastMessage />
         </div>
     );
 }

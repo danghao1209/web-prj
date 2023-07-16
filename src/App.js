@@ -8,9 +8,9 @@ import { publicRoutes, privateRoutes, nonDefaultLayoutRoutes } from '~/routes';
 import DefaultLayout from '~/layouts';
 import NotFound from '~/pages/NotFound';
 import { setLoading, setDataPro } from '~/features/productsAllSlice';
+import { pathApi } from './asset/path';
 
 // Import các thành phần cần thiết
-const path = 'http://localhost:1209/';
 
 function App() {
     const PrivateWrapper = ({ user }) => {
@@ -24,7 +24,7 @@ function App() {
         try {
             (async () => {
                 dispatch(setLoading(true));
-                const result = await axios.get(`${path}api/product/all`);
+                const result = await axios.get(`${pathApi}/product/all`);
                 dispatch(setDataPro(result.data));
                 dispatch(setLoading(false));
             })();
@@ -34,10 +34,9 @@ function App() {
             dispatch(setLoading(false));
         }
     }, [dispatch]);
-
     if (isLoading) {
         return (
-            <div className="px-[50px] mx-[-15px]">
+            <div className="lg:px-[50px] lg:mx-[-15px]">
                 <div className="flex items-center justify-center">
                     <CircularProgress color="inherit" />
                 </div>

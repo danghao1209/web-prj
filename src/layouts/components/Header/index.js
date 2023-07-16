@@ -35,11 +35,11 @@ function Header() {
         }
     };
     return (
-        <div className="max-w-[100%]">
-            <div className="flex flex-col justify-center font-sans font-medium text-sm px-[10px] lg:px-[15px] fixed w-full z-10 top-0 bg-white lg:m-auto border border-[#ebebeb] shadow-sm">
+        <div className="z-50">
+            <div className="lg:max-w-full flex flex-col justify-center font-sans font-medium text-sm lg:px-[15px] w-full z-10 top-0 left-0 bg-white lg:m-auto border border-[#ebebeb] shadow-sm">
                 {/* header1 */}
 
-                <div className="flex justify-between items-center lg:h-[64px] lg:px-[50px] lg:mx-[-15px]">
+                <div className="flex justify-between items-center lg:h-[64px] lg:px-[50px] lg:mx-[-15px] w-full px-[10px]">
                     <div className="lg:flex lg:items-center basis-[33.33333333%] ">
                         <div>
                             <div className="lg:hidden flex items-center justify-start">
@@ -55,17 +55,17 @@ function Header() {
                         <div
                             className={`${
                                 hiddenMenuBar ? 'hidden' : ''
-                            } flex flex-col fixed top-0 left-0 w-[300px] h-[100vh] text-[#1c1c1c] bg-[#fff] z-[9999] shadow-none touch-manipulation lg:hidden`}
+                            } flex flex-col fixed top-0 left-0 right-0 w-[300px] h-[100vh] text-[#1c1c1c] bg-[#fff] z-[999999] shadow-none touch-manipulation lg:hidden`}
                         >
                             <Link
                                 to={'/'}
-                                className="lg:px-[20px] lg:py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
+                                className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
                                 onClick={() => setHiddenMenuBar(true)}
                             >
                                 Trang Chủ
                             </Link>
                             <Link
-                                className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
+                                className="lg:px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
                                 onClick={() => setHiddenMenuBar(true)}
                             >
                                 NEW ARRIVAL
@@ -131,7 +131,7 @@ function Header() {
                         ></div>
 
                         <div className="hidden lg:flex lg:items-center">
-                            <div className="py-5 pr-5 lg:mr-[1.875vw]">
+                            <div className="py-5 lg:pr-5 lg:mr-[1.875vw]">
                                 <Link to="/contact" className="flex items-center">
                                     <FontAwesomeIcon icon={faLocationDot} className="text-xl lg:mr-1" />
                                     <div className="cursor-pointer " title="ĐỊA CHỈ: VIỆT NAM">
@@ -150,7 +150,7 @@ function Header() {
                         </div>
                     </div>
 
-                    <div className=" max-w-[33.33333%] pl-[20px] basis-[33.3333%]">
+                    <div className="basis-[33.3333%]">
                         <Link to="/">
                             <img
                                 src="https://bizweb.dktcdn.net/100/414/728/themes/867455/assets/logo.png?1685614743610"
@@ -209,8 +209,8 @@ function Header() {
                 </div>
 
                 {/* header 2 */}
-                <div className=" ">
-                    <div className="hidden lg:h-[44pxs] lg:flex lg:text-center lg:m-0 lg:justify-center">
+                <div className="hidden lg:block  ">
+                    <div className="lg:h-[44pxs] lg:flex lg:text-center lg:m-0 lg:justify-center">
                         <Link to="/">
                             <div className="px-[20px] py-[10px]">TRANG CHỦ</div>
                         </Link>

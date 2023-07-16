@@ -6,6 +6,7 @@ import DefaultLayerAccount from '../DefaultLayoutAccount';
 import Button from '~/components/Button';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
 import ToastMessage, { success, error } from '~/components/Toast';
+import { authApi } from '~/asset/path';
 
 function ChangePassword() {
     const [oldPassword, setOldPassword] = useState('');
@@ -25,7 +26,7 @@ function ChangePassword() {
 
             try {
                 await axios.post(
-                    'http://localhost:2001/api/auth/changepassword',
+                    `${authApi}/changepassword`,
                     {
                         oldPass: oldPassword,
                         password: newPassword1,
@@ -46,7 +47,7 @@ function ChangePassword() {
                 const newTokenAccess = await GetNewAccessToken();
                 try {
                     await axios.post(
-                        'http://localhost:2001/api/auth/changepassword',
+                        `${authApi}/changepassword`,
                         {
                             oldPass: oldPassword,
                             newPass: newPassword1,

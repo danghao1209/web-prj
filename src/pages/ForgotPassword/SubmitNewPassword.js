@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Button from '~/components/Button';
 import ToastMessage, { success, error } from '~/components/Toast';
+import { authApi } from '~/asset/path';
 
 function SubmitNewPassword() {
     const [newPassword1, setNewPassword1] = useState('');
@@ -17,7 +18,7 @@ function SubmitNewPassword() {
             }
 
             await axios.post(
-                'http://localhost:2001/api/auth/submit-forgot-password',
+                `${authApi}/submit-forgot-password`,
                 {
                     password: newPassword1,
                 },

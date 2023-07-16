@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { authApi } from '~/asset/path';
 
 import Button from '~/components/Button';
 import ToastMessage, { success, error, warning } from '~/components/Toast';
@@ -13,7 +14,7 @@ function Login() {
     const onLogin = async () => {
         try {
             if (email && password) {
-                const result = await axios.post('http://localhost:2001/api/auth/login', { email, password });
+                const result = await axios.post(`${authApi}/login`, { email, password });
 
                 if (result.data.status === 1) {
                     success(result.data.message);

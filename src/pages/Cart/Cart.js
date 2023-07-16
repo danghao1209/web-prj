@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProInCart from './ProInCart';
 import Button from '~/components/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { setPriceCart } from '~/features/cartSlice';
 import _ from 'lodash';
 

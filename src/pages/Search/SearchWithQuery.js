@@ -1,9 +1,9 @@
+import { pathApi } from '~/asset/path';
 import Product from './Product';
 import SearchNonQuerry from './SearchNonQuerry';
 import { useEffect, useState } from 'react';
 
 function SearchWithQuery({ dataRender = [] }) {
-    const path = 'http://localhost:1209/';
     const [data, setData] = useState([]);
     useEffect(() => {
         (() => {
@@ -20,7 +20,7 @@ function SearchWithQuery({ dataRender = [] }) {
                     {dataRender?.length !== 0 ? (
                         <div className="grid grid-cols-2 gap-y-[50px] lg:grid-cols-5 lg:gap-y-[50px]">
                             {data?.map((product) => {
-                                return <Product product={product} path={path} />;
+                                return <Product product={product} path={pathApi} />;
                             })}
                         </div>
                     ) : (

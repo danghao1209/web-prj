@@ -9,6 +9,7 @@ import ToastMessage, { success, error } from '~/components/Toast';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
 import { setAddressData } from '~/features/userSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { pathApi } from '~/asset/path';
 
 function ModalEditAdrress({ isShow = false, handleClose, addresses }) {
     const [data, setData] = useState();
@@ -58,7 +59,7 @@ function ModalEditAdrress({ isShow = false, handleClose, addresses }) {
             }
             try {
                 const result = await axios.post(
-                    'http://localhost:1209/api/info/address',
+                    `${pathApi}/info/address`,
                     {
                         phone,
                         address,
@@ -87,7 +88,7 @@ function ModalEditAdrress({ isShow = false, handleClose, addresses }) {
                 const newTokenAccess = await GetNewAccessToken();
                 try {
                     const result = await axios.post(
-                        'http://localhost:1209/api/info/address',
+                        `${pathApi}/info/address`,
                         {
                             phone,
                             address,

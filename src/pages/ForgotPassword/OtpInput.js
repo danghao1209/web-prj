@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ToastMessage, { success, error, warning } from '~/components/Toast';
+import { authApi } from '~/asset/path';
 
 export default function OtpInput({ email, setPage }) {
     const [timerCount, setTimer] = useState(60);
@@ -10,7 +11,7 @@ export default function OtpInput({ email, setPage }) {
     async function resendOTP() {
         try {
             if (email) {
-                await axios.post('http://localhost:2001/api/auth/otp-forgot-password', { email: email });
+                await axios.post(`${authApi}/otp-forgot-password`, { email: email });
                 success('Đã gửi OTP');
             } else {
                 warning('Vui lòng điền email');
@@ -27,7 +28,8 @@ export default function OtpInput({ email, setPage }) {
                     throw new Error('OTP thiếu');
                 }
                 const otpString = OTPinput.join('');
-                const result = await axios.post('http://localhost:2001/api/auth/submit-otp', {
+
+                const result = await axios.post(`${authApi}/submit-otp`, {
                     email: email,
                     otp: otpString,
                 });

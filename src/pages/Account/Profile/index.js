@@ -6,9 +6,11 @@ import { CircularProgress } from '@mui/material';
 
 import { setLoading, setProfileData, setError } from '~/features/userSlice';
 import DefaultLayoutAccount from '~/pages/Account/DefaultLayoutAccount';
+import { pathApi, authApi } from '~/asset/path';
+import GetNewAccessToken from '~/func/GetNewAccessToken';
 
 const fetchData = (tokenACCESS) =>
-    axios.get('http://localhost:1209/api/info', {
+    axios.get(`${pathApi}/info`, {
         headers: {
             Authorization: tokenACCESS,
         },
@@ -35,15 +37,7 @@ function ProfilePage() {
                 dispatch(setLoading(false));
             } catch (error) {
                 try {
-                    const newTokenAccess = await axios.post(
-                        'http://localhost:2001/api/auth/token',
-                        {},
-                        {
-                            headers: {
-                                'Refresh-Token': tokenREFRESH,
-                            },
-                        },
-                    );
+                    const newTokenAccess = await GetNewAccessToken();
                     localStorage.setItem('tokenACCESS', newTokenAccess.data.tokenACCESS);
                     const newProfileData = await fetchData(newTokenAccess.data.tokenACCESS);
                     dispatch(setProfileData(newProfileData.data.data));

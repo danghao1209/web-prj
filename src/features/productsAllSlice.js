@@ -10,7 +10,7 @@ const productsAllSlice = createSlice({
     initialState,
     reducers: {
         setDataPro(state, action) {
-            state.dataProAll = action.payload;
+            state.dataProAll.products = action.payload;
         },
         setLoading: (state, action) => {
             state.isLoading = action.payload;

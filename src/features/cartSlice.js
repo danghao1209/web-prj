@@ -2,19 +2,21 @@ import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
 import _ from 'lodash';
+import ToastMessage, { error } from '~/components/Toast';
+import { pathApi } from '~/asset/path';
 
 const initialState = {
     cart: null,
     proInCart: null,
     priceCart: null,
     isLoading: false,
-    error: null,
+    errorcart: null,
 };
 
 const changeQuantity = createAsyncThunk('cart/changeQuantity', async ({ id, quantity, tokenACCESS }) => {
     try {
         const response = await axios.patch(
-            'http://localhost:1209/api/cart',
+            `${pathApi}/cart`,
             { data: { id, quantity } },
             {
                 headers: {
@@ -22,12 +24,16 @@ const changeQuantity = createAsyncThunk('cart/changeQuantity', async ({ id, quan
                 },
             },
         );
+
         return response.data.data;
-    } catch (error) {
+    } catch (errorr) {
+        if (errorr.message === 'Request failed with status code 400') {
+            error('Không đủ số lượng sản phẩm vui lòng sửa lại số lượng');
+        }
         try {
             const newTokenAccess = await GetNewAccessToken();
             const response = await axios.patch(
-                'http://localhost:1209/api/cart',
+                `${pathApi}/cart`,
                 { data: { id, quantity } },
                 {
                     headers: {
@@ -36,8 +42,8 @@ const changeQuantity = createAsyncThunk('cart/changeQuantity', async ({ id, quan
                 },
             );
             return response.data.data;
-        } catch (error) {
-            throw new Error(error);
+        } catch (err) {
+            throw new Error(err);
         }
     }
 });
@@ -45,7 +51,7 @@ const changeQuantity = createAsyncThunk('cart/changeQuantity', async ({ id, quan
 const deleteProduct = createAsyncThunk('cart/deleteProduct', async ({ id, tokenACCESS }) => {
     try {
         const response = await axios.post(
-            'http://localhost:1209/api/cart/delete',
+            `${pathApi}/cart/delete`,
             { data: { id } },
             {
                 headers: {
@@ -58,7 +64,7 @@ const deleteProduct = createAsyncThunk('cart/deleteProduct', async ({ id, tokenA
         try {
             const newTokenAccess = await GetNewAccessToken();
             const response = await axios.post(
-                'http://localhost:1209/api/cart/delete',
+                `${pathApi}/cart/delete`,
                 { id },
                 {
                     headers: {
@@ -87,7 +93,7 @@ const cartSlice = createSlice({
             state.priceCart = action.payload;
         },
         setError: (state, action) => {
-            state.error = action.payload;
+            state.errorCart = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -101,8 +107,8 @@ const cartSlice = createSlice({
                 foundItem.quantity = action.payload.quantity; // Cập nhật thuộc tính quantity trong bản sao phần tử tìm thấy
                 state.cart.carts = updatedCarts; // Gán bản sao mảng đã được cập nhật vào state
             })
-            .addCase(changeQuantity.rejected, (state) => {
-                state.error = 'Lỗi khi thay đổi số lượng sản phẩm';
+            .addCase(changeQuantity.rejected, (state, action) => {
+                state.errorcart = action.error.message;
             })
             .addCase(deleteProduct.pending, (state) => {
                 state.error = null;
@@ -111,8 +117,8 @@ const cartSlice = createSlice({
                 _.remove(state.cart.carts, (item) => item._id === action.payload);
                 state.cart.totalQuanlity -= 1;
             })
-            .addCase(deleteProduct.rejected, (state) => {
-                state.error = 'Lỗi khi xoá sản phẩm';
+            .addCase(deleteProduct.rejected, (state, action) => {
+                state.errorcart = action.error.message;
             });
     },
 });

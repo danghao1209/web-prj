@@ -10,6 +10,7 @@ import { error } from '~/components/Toast';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAddressData } from '~/features/userSlice';
 import { DataAddress } from '~/asset/files/DataAdress';
+import { pathApi } from '~/asset/path';
 
 function Addresses() {
     const [isShow, setIsShow] = useState(false);
@@ -42,7 +43,7 @@ function Addresses() {
                     return;
                 }
                 try {
-                    const dataFetch = await axios.get('http://localhost:1209/api/info/address', {
+                    const dataFetch = await axios.get(`${pathApi}/info/address`, {
                         headers: {
                             Authorization: tokenACCESS,
                         },
@@ -50,10 +51,9 @@ function Addresses() {
                     dispatch(setAddressData(dataFetch.data.data));
                 } catch (err) {
                     const newTokenAccess = await GetNewAccessToken();
-                    console.log(newTokenAccess);
                     try {
                         const dataFetch = await axios.get(
-                            'http://localhost:1209/api/info/address',
+                            `${pathApi}/info/address`,
 
                             {
                                 headers: {

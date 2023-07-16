@@ -16,6 +16,8 @@ import IfLikeSlick from './IfLikeSlick';
 import check from '~/asset/images/select-pro.png';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
 import IfLikeSlickPhone from './IfLikeSlickPhone';
+import { pathApi } from '~/asset/path';
+import sizeChart from '~/asset/images/sizechart.png';
 
 function Product() {
     const contents = [
@@ -50,7 +52,6 @@ function Product() {
     const { dataProAll } = useSelector((state) => state.productsAll);
     const { productData, indexColor, size, isLoading } = useSelector((state) => state.product);
     const dispatch = useDispatch();
-    const path = 'http://localhost:1209/';
     const { id } = useParams();
     const navigate = useNavigate();
     useEffect(() => {
@@ -68,7 +69,7 @@ function Product() {
             } else {
                 dispatch(setLoading(true));
                 (async () => {
-                    const result = await axios.get(`${path}api/product/${id}`);
+                    const result = await axios.get(`${pathApi}/product/${id}`);
                     if (result.status === 200) {
                         dispatch(setProductData(result.data));
                     } else {
@@ -129,7 +130,7 @@ function Product() {
 
     if (isLoading) {
         return (
-            <div className="px-[50px] mx-[-15px]">
+            <div className="px-[50px] lg:mx-[-15px]">
                 <div className="flex items-center justify-center">
                     <CircularProgress color="inherit" />
                 </div>
@@ -150,10 +151,10 @@ function Product() {
 
                 <div className="w-full lg:w-[82%] lg:flex lg:px-[15px] justify-center lg:justify-start ">
                     <div className="w-full lg:w-[67%] lg:px-[15px]">
-                        <ItemProduct data={productData} indexColor={indexColor} path={path} />
+                        <ItemProduct data={productData} indexColor={indexColor} path={pathApi} />
                     </div>
                     {/* {phần info} */}
-                    <div className="px-[-15px] lg:w-[33%]">
+                    <div className="lg:px-[-15px] lg:w-[33%]">
                         <div className="">
                             <div className="px-[15px]">
                                 <div className="flex items-center justify-center lg:justify-start lg:mb-[5px] lg:mt-[0px] text-[25px] text-[#707070] font-medium">
@@ -171,7 +172,7 @@ function Product() {
                                         <div className="lg:hidden flex items-center justify-center">
                                             <FontAwesomeIcon
                                                 icon={faArrowRight}
-                                                className="text-[12px] mx-[5px] font-light"
+                                                className="text-[12px] lg:mx-[5px] font-light"
                                             />
                                         </div>
                                         <div className="tracking-[0.25px] text-[19px] line-through ml-[10px]">
@@ -209,7 +210,7 @@ function Product() {
                                                                 dispatch(setIndexColor(index));
                                                             }}
                                                         >
-                                                            <img src={`${path}${item.images[0]}`} alt="" />
+                                                            <img src={`${pathApi}/public/${item.images[0]}`} alt="" />
 
                                                             <div
                                                                 className={`${
@@ -280,11 +281,7 @@ function Product() {
                                     </div>
                                 </div>
                                 <div className="mb-[15px]">
-                                    <img
-                                        className="w-[full]"
-                                        src="//bizweb.dktcdn.net/100/414/728/files/t-shirt-01-e0a4e8c2-cda0-4952-8be2-71921763a342.jpg?v=1635851197808"
-                                        alt=""
-                                    />
+                                    <img className="w-[full]" src={sizeChart} alt="" />
                                 </div>
                                 <div className="mb-[20px] text-[16px]">
                                     <div className="mb-[20px] text-[#707070] font-bold w">Mô tả</div>
@@ -309,16 +306,16 @@ function Product() {
 
             {/* container dưới */}
             {/* phần có thể b cũng thích */}
-            <div className="mt-[20px] mx-[-15px] mb-[10px] max-w-full">
+            <div className="mt-[20px] lg:mx-[-15px] mb-[10px] max-w-full">
                 <div className="mb-[50px] flex text-center justify-center items-center">
                     <div className="uppercase text-[26px] text-[#1c1c1c] leading-[28px] tracking-[2.4px] relative before:absolute before:w-[50px] before:left-[50%] before:bottom-[-15px] before:h-[2px] before:bg-[#000] before:ml-[-25px]">
                         Có thể bạn cũng thích
                     </div>
                 </div>
-                <div className="hidden lg:block px-[50px] max-w-full">
+                <div className="hidden lg:block lg:px-[50px] max-w-full z-2">
                     <IfLikeSlick />
                 </div>
-                <div className="lg:hidden max-w-full mx-auto">
+                <div className="lg:hidden max-w-full lg:mx-auto z-2">
                     <IfLikeSlickPhone />
                 </div>
             </div>

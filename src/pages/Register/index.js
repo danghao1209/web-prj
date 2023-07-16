@@ -6,6 +6,7 @@ import { CircularProgress } from '@mui/material';
 import Button from '~/components/Button';
 import ToastMessage, { promise } from '~/components/Toast';
 import { setEmail, setPassword, setPhone, setName } from '~/features/registerSlice';
+import { authApi } from '~/asset/path';
 
 function Register() {
     const navigate = useNavigate();
@@ -13,14 +14,11 @@ function Register() {
     const { email, password, name, phone, isLoading } = useSelector((state) => state.register);
     const onRegister = async () => {
         try {
-            let result = await promise(
-                axios.post('http://localhost:2001/api/auth/register', { email, password, name, phone }),
-                {
-                    pending: 'Promise is pending',
-                    success: 'Đăng ký thành công',
-                    error: 'Đăng ký thất bại',
-                },
-            );
+            let result = await promise(axios.post(`${authApi}/register`, { email, password, name, phone }), {
+                pending: 'Promise is pending',
+                success: 'Đăng ký thành công',
+                error: 'Đăng ký thất bại',
+            });
             if (result.data.status) {
                 localStorage.setItem('tokenUser', result.data.token);
                 setTimeout(() => {

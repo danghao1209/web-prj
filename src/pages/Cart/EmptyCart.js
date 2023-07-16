@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import emtyCart from '~/asset/images/empty-cart.png';
 function EmptyCart() {
     return (
         <div className="mx-[-15px]">
             <div className="max-w-[200px] h-[auto] mx-[auto]">
-                <img src="//bizweb.dktcdn.net/100/325/189/themes/675912/assets/empty-cart.png?1533693226542" alt="" />
+                <img src={emtyCart} alt="" />
             </div>
             <div className="flex items-center justify-center">
                 <Link

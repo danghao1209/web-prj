@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { pathApi } from '~/asset/path';
 
 const initialState = {
     productData: null,
@@ -14,7 +15,7 @@ export const fetchDataAddCart = createAsyncThunk('product/fetchDataAddCart', asy
 
     try {
         const response = await axios.post(
-            'http://localhost:1209/api/cart',
+            `${pathApi}/cart`,
             {
                 id: productData._id,
                 data: { size, color: indexColor },

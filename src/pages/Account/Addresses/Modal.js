@@ -7,6 +7,7 @@ import { DataAddress } from '~/asset/files/DataAdress';
 import { useNavigate } from 'react-router-dom';
 import ToastMessage, { success, error } from '~/components/Toast';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
+import { pathApi, authApi } from '~/asset/path';
 
 function Modal({ isShow = false, handleClose, dataAdd }) {
     const [data, setData] = useState();
@@ -49,7 +50,7 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
             }
             try {
                 await axios.post(
-                    'http://localhost:1209/api/info/address',
+                    `${pathApi}/info/address`,
                     {
                         phone,
                         address,
@@ -73,7 +74,7 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
                 const newTokenAccess = await GetNewAccessToken();
                 try {
                     await axios.post(
-                        'http://localhost:1209/api/info/address',
+                        `${pathApi}/info/address`,
                         {
                             phone,
                             address,

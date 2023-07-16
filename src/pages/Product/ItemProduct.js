@@ -6,10 +6,10 @@ function ItemProduct({ data, path, indexColor = 0 }) {
             <div className="hidden lg:flex justify-between ">
                 <div className="mr-[30px] sticky top-0">
                     {data
-                        ? data.data[indexColor].images.map((item) => {
+                        ? data?.data[indexColor]?.images?.map((item) => {
                               return (
                                   <div className="w-[90px] mb-[15px]">
-                                      <img src={`${path}${item}`} alt={''} />
+                                      <img src={`${path}/public/${item}`} alt={''} />
                                   </div>
                               );
                           })
@@ -18,10 +18,10 @@ function ItemProduct({ data, path, indexColor = 0 }) {
 
                 <div className="">
                     {data
-                        ? data.data[indexColor].images.map((item) => {
+                        ? data?.data[indexColor]?.images?.map((item) => {
                               return (
                                   <div className="w-[calc(100% - 120px)] mb-[15px]">
-                                      <img src={`${path}${item}`} alt={''} />
+                                      <img src={`${path}/public/${item}`} alt={''} />
                                   </div>
                               );
                           })

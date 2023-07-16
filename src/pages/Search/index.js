@@ -6,18 +6,18 @@ import { useSelector } from 'react-redux';
 
 import SearchNonQuerry from './SearchNonQuerry';
 import SearchWithQuery from './SearchWithQuery';
+import { pathApi } from '~/asset/path';
 
 function SearchPage() {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get('q');
     const [data, setData] = useState();
-    const path = 'http://localhost:1209/';
 
     useEffect(() => {
         try {
             (async () => {
-                const result = await axios.post(`${path}api/product/search`, {
+                const result = await axios.post(`${pathApi}/product/search`, {
                     valueSearch: query,
                 });
 

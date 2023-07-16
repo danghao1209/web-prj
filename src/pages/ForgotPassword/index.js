@@ -5,6 +5,7 @@ import { createContext, useState } from 'react';
 import Button from '~/components/Button';
 import OtpInput from './OtpInput';
 import SubmitNewPassword from './SubmitNewPassword';
+import { authApi } from '~/asset/path';
 
 export const RecoveryContext = createContext();
 function ForgotPassword() {
@@ -14,7 +15,7 @@ function ForgotPassword() {
     const onGetOTP = async () => {
         try {
             if (email) {
-                await axios.post('http://localhost:2001/api/auth/otp-forgot-password', { email: email });
+                await axios.post(`${authApi}/otp-forgot-password`, { email: email });
                 success('Đã gửi OTP');
                 setTimeout(() => {
                     setPage('otp');
