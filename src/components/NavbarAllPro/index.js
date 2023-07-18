@@ -40,11 +40,7 @@ function NavbarAllPro() {
     const [isClicked, setIsClicked] = useState(false);
 
     return (
-        <div
-            className="mt-[105px] mb-[15px] px-[15px] flex justify-between items-center leading-[30px] tracking-[0.25px]"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="mt-[105px] mb-[15px] px-[15px] flex justify-between items-center leading-[30px] tracking-[0.25px]">
             <Tippy
                 interactive
                 placement="bottom-start"
@@ -59,7 +55,11 @@ function NavbarAllPro() {
                     </div>
                 )}
             >
-                <div className="mb-[10px] flex items-center uppercase text-[16px] font-medium">
+                <div
+                    className="mb-[10px] flex items-center uppercase text-[16px] font-medium"
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
                     Danh Mục
                     <FontAwesomeIcon icon={isHovered ? faChevronUp : faChevronDown} className="text-[12px] ml-[5px]" />
                 </div>

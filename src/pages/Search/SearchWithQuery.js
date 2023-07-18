@@ -24,7 +24,7 @@ function SearchWithQuery({ dataRender = [] }) {
                             })}
                         </div>
                     ) : (
-                        <div className="pt-[30px] w-[80%] m-auto">
+                        <div className="py-[30px] lg:w-[80%] m-auto">
                             <div className="mb-[20px] text-[22px] tracking-[2px] uppercase flex justify-center items-center text-center">
                                 KHÔNG TÌM THẤY BẤT KỲ KẾT QUẢ NÀO VỚI TỪ KHÓA TRÊN.
                             </div>
