@@ -1,10 +1,10 @@
+import _ from 'lodash';
 import { useSelector } from 'react-redux';
 
 import Product from '~/components/Product';
 import NavbarAllPro from '~/components/NavbarAllPro';
 import { pathApi } from '~/asset/path';
 import { useEffect, useState } from 'react';
-import _ from 'lodash';
 
 function AllSalePage() {
     const [data, setData] = useState();
