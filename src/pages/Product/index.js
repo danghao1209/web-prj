@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faPhoneSquare } from '@fortawesome/free-solid-svg-icons';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 import ToastMessage, { success, warning } from '~/components/Toast';
@@ -26,8 +26,8 @@ function Product() {
             link: '/top',
             children: [
                 { title: 'T-Shirt', link: '/t-shirt' },
-                { title: 'Shirt & Polo', link: '/shirt&polo' },
-                { title: 'Hoodie & Sweatshirt', link: '/hoodie&sweatshirt' },
+                { title: 'Shirt & Polo', link: '/shirt' },
+                { title: 'Hoodie & Sweatshirt', link: '/hoodie' },
                 { title: 'Jacket', link: '/jacket' },
             ],
         },
@@ -54,17 +54,17 @@ function Product() {
     const dispatch = useDispatch();
     const { id } = useParams();
     const navigate = useNavigate();
+    const [dataSlider, setDataSlider] = useState();
     useEffect(() => {
         try {
             if (dataProAll.products?.length > 0) {
                 dispatch(setLoading(true));
                 const product = _.find(dataProAll.products, { _id: id });
-                console.log(product);
                 if (product) {
                     dispatch(setProductData(product));
                     dispatch(setLoading(false));
                 } else {
-                    throw new Error('Loi');
+                    throw new Error('Lỗi vui lòng reload');
                 }
             } else {
                 dispatch(setLoading(true));
@@ -73,17 +73,22 @@ function Product() {
                     if (result.status === 200) {
                         dispatch(setProductData(result.data));
                     } else {
-                        console.log('lỗi');
+                        throw new Error('Lỗi vui lòng reload');
                     }
                 })();
                 dispatch(setLoading(false));
             }
         } catch (error) {
-            console.log('lỗi fecth');
+            warning(error.message);
         } finally {
             dispatch(setLoading(false));
         }
     }, []);
+
+    useEffect(() => {
+        const filteredProducts = _.filter(dataProAll?.products, (product) => product._id !== id);
+        setDataSlider(filteredProducts);
+    }, [dataProAll]);
 
     let discount = (price, perDiscount) => {
         return (price * perDiscount) / 100;
@@ -313,10 +318,10 @@ function Product() {
                     </div>
                 </div>
                 <div className="hidden lg:block lg:px-[50px] max-w-full z-2">
-                    <IfLikeSlick />
+                    <IfLikeSlick data={dataSlider} />
                 </div>
                 <div className="lg:hidden max-w-full lg:mx-auto z-2">
-                    <IfLikeSlickPhone />
+                    <IfLikeSlickPhone data={dataSlider} />
                 </div>
             </div>
             {/* hotline */}

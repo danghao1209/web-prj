@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import Product from './Product';
-import NavbarAllPro from './NavbarAllPro';
+import Product from '~/components/Product';
+import NavbarAllPro from '~/components/NavbarAllPro';
 import { pathApi } from '~/asset/path';
 
 function ProductPage() {

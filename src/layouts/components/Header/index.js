@@ -23,9 +23,33 @@ function Header() {
     const [hiddenMenuPro, setHiddenMenuPro] = useState(true);
 
     const MenuItem = [
-        { title: 'TOP', children: ['T-Shirt', 'Shirt & Polo', 'Hoodie & Sweatshirt', 'Jacket'] },
-        { title: 'BOTTOM', children: ['Pants', 'Shorts', 'Hoodie & Sweatshirt'] },
-        { title: 'ACCESSORY', children: ['Bag & Backpack', 'Hat', 'Others'] },
+        {
+            title: 'TOP',
+            link: '/top',
+            children: [
+                { title: 'T-Shirt', link: '/t-shirt' },
+                { title: 'Shirt & Polo', link: '/shirt' },
+                { title: 'Hoodie & Sweatshirt', link: '/hoodie' },
+                { title: 'Jacket', link: '/jacket' },
+            ],
+        },
+        {
+            title: 'BOTTOM',
+            link: '/bottom',
+            children: [
+                { title: 'Pants', link: '/pants' },
+                { title: 'Shorts', link: '/shorts' },
+            ],
+        },
+        {
+            title: 'ACCESSORY',
+            link: '/accessory',
+            children: [
+                { title: 'Bag & Backpack', link: '/bag' },
+                { title: 'Hat', link: '/hat' },
+                { title: 'Others', link: '/others' },
+            ],
+        },
     ];
 
     const handleChange = (e) => {
@@ -98,6 +122,7 @@ function Header() {
                             </div>
 
                             <Link
+                                to="/all-sale"
                                 className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
                                 onClick={() => setHiddenMenuBar(true)}
                             >
@@ -111,12 +136,14 @@ function Header() {
                                 Về Chúng Tôi
                             </Link>
                             <Link
+                                to="/blog"
                                 className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
                                 onClick={() => setHiddenMenuBar(true)}
                             >
                                 Blog
                             </Link>
                             <Link
+                                to="/contact"
                                 className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
                                 onClick={() => setHiddenMenuBar(true)}
                             >
@@ -217,7 +244,7 @@ function Header() {
                         <Link to="/contact">
                             <div className="px-[20px] py-[10px]">VỀ CHÚNG TÔI</div>
                         </Link>
-                        <Link>
+                        <Link to="/all-sale">
                             <div className="px-[20px] py-[10px]">ALL SALE</div>
                         </Link>
 
@@ -238,7 +265,7 @@ function Header() {
                                                     className="w-[20%] p-[10px] leading-[1.3] flex flex-col text-left"
                                                     key={index}
                                                 >
-                                                    <Link to="/top" className="hover:text-red-600">
+                                                    <Link to={item.link} className="hover:text-red-600">
                                                         <div className="pt-[5px] font-semibold mb-[10px]">
                                                             {item.title}
                                                         </div>
@@ -246,8 +273,8 @@ function Header() {
 
                                                     {item.children.map((child, index) => {
                                                         return (
-                                                            <Link to="/t-shirt" className="hover:text-red-600">
-                                                                <div className="pt-[5px] font-light">{child}</div>
+                                                            <Link to={child.link} className="hover:text-red-600">
+                                                                <div className="pt-[5px] font-light">{child.title}</div>
                                                             </Link>
                                                         );
                                                     })}
@@ -277,20 +304,20 @@ function Header() {
                                     {...attrs}
                                     className="w-[220px] shadow-sm border-b-[1px] border-gray-200 opacity-100 bg-gray-100 bg-opacity-100"
                                 >
-                                    {MenuItem.map((item, index) => {
+                                    {MenuItem?.map((item, i) => {
                                         return (
-                                            <div ref={ref} key={index}>
+                                            <div ref={ref} key={i}>
                                                 <Tippy
                                                     interactive
                                                     placement="right-start"
                                                     offset={[0, 0]}
                                                     render={(attrs) => (
-                                                        <div key={index}>
-                                                            {item.children.map((child, index) => {
+                                                        <div key={i}>
+                                                            {item?.children.map((child, index) => {
                                                                 return (
                                                                     <Link
                                                                         key={index}
-                                                                        to="/t-shirt"
+                                                                        to={child?.link}
                                                                         className="hover:text-red-600"
                                                                     >
                                                                         <div
@@ -298,7 +325,7 @@ function Header() {
                                                                             {...attrs}
                                                                             className="w-[220px] p-[10px] shadow-sm border-b-[1px] border-gray-200 opacity-100 bg-gray-100 bg-opacity-60 text-left"
                                                                         >
-                                                                            {child}
+                                                                            {child?.title}
                                                                         </div>
                                                                     </Link>
                                                                 );
@@ -306,9 +333,9 @@ function Header() {
                                                         </div>
                                                     )}
                                                 >
-                                                    <Link key={index} to="/top" className="hover:text-red-600">
+                                                    <Link key={i} to={item?.link} className="hover:text-red-600">
                                                         <div className="flex justify-between mx-auto my-0 text-left items-center py-[10px] pl-[5px] pr-[20px]">
-                                                            <div>{item.title}</div>
+                                                            <div>{item?.title}</div>
                                                             <FontAwesomeIcon icon={faAngleRight} />
                                                         </div>
                                                     </Link>
@@ -326,9 +353,7 @@ function Header() {
                                 </div>
                             </Link>
                         </Tippy>
-                        <Link>
-                            <div className="px-[20px] py-[10px]">BST THU ĐÔNG</div>
-                        </Link>
+
                         <Link to="/contact">
                             <div className="px-[20px] py-[10px]">LIÊN HỆ</div>
                         </Link>
