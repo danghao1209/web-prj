@@ -34,9 +34,9 @@ function AboutPage() {
                                     những năm qua "chú hề" liên tục chuyển mình, mang đến nhiều niềm vui, sự mới mẻ
                                 </div>
                                 <div className="mb-[10px] text-center">
-                                    Và sẽ không dừng lại ở đó, ClownZ mong muốn trở thành 1 phần quan trọng trong việc
-                                    phát triển, phổ biến văn hoá hiphop nói riêng & là đại diện nổi bật của tinh thần
-                                    đột phá trong thời trang đường phố Việt Nam
+                                    Và sẽ không dừng lại ở đó, DahaClown mong muốn trở thành 1 phần quan trọng trong
+                                    việc phát triển, phổ biến văn hoá hiphop nói riêng & là đại diện nổi bật của tinh
+                                    thần đột phá trong thời trang đường phố Việt Nam
                                 </div>
                             </div>
                             <div className="text-[16px] mb-[30px]">
