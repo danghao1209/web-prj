@@ -1,8 +1,6 @@
 import axios from 'axios';
-import _ from 'lodash';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import SearchNonQuerry from './SearchNonQuerry';
 import SearchWithQuery from './SearchWithQuery';

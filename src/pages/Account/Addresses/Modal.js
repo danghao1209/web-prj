@@ -7,7 +7,7 @@ import { DataAddress } from '~/asset/files/DataAdress';
 import { useNavigate } from 'react-router-dom';
 import ToastMessage, { success, error } from '~/components/Toast';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
-import { pathApi, authApi } from '~/asset/path';
+import { pathApi } from '~/asset/path';
 
 function Modal({ isShow = false, handleClose, dataAdd }) {
     const [data, setData] = useState();

@@ -13,7 +13,7 @@ function ShirtPage() {
         const filteredArray = _.filter(dataProAll.products, { category: 'Shirt' });
         setData(filteredArray);
         console.log(filteredArray);
-    }, []);
+    }, [dataProAll.products]);
 
     return (
         <div className="lg:px-[50px] lg:mx-[-15px]">

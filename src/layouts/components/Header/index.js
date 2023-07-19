@@ -129,7 +129,7 @@ function Header() {
                                 ALL SALE
                             </Link>
                             <Link
-                                to="/contact"
+                                to="/about"
                                 className="px-[20px] py-[10px] text-left align-top float-none border-b-[1px] border-[rgba(92,92,92,0.1)]"
                                 onClick={() => setHiddenMenuBar(true)}
                             >
@@ -241,7 +241,7 @@ function Header() {
                         <Link to="/">
                             <div className="px-[20px] py-[10px]">TRANG CHỦ</div>
                         </Link>
-                        <Link to="/contact">
+                        <Link to="/about">
                             <div className="px-[20px] py-[10px]">VỀ CHÚNG TÔI</div>
                         </Link>
                         <Link to="/all-sale">

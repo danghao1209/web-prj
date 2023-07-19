@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
 import _ from 'lodash';
-import ToastMessage, { error } from '~/components/Toast';
+import { error } from '~/components/Toast';
 import { pathApi } from '~/asset/path';
 
 const initialState = {

@@ -13,7 +13,7 @@ function AllSalePage() {
         const productsWithDiscount = _.filter(dataProAll.products, (product) => product.discountPercentage !== 0);
         setData(productsWithDiscount);
         console.log(productsWithDiscount);
-    }, []);
+    }, [dataProAll.products]);
 
     return (
         <div className="lg:px-[50px] lg:mx-[-15px]">

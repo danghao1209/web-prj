@@ -12,7 +12,7 @@ function BottomPage() {
     useEffect(() => {
         const filteredArray = _.filter(dataProAll.products, { category: 'Pants' }, { category: 'Shorts' });
         setData(filteredArray);
-    }, []);
+    }, [dataProAll.products]);
 
     return (
         <div className="lg:px-[50px] lg:mx-[-15px]">

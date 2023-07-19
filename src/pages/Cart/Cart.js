@@ -36,7 +36,7 @@ function Cart() {
             }),
         );
         dispatch(setPriceCart({ discountPrice, totalPrice }));
-    }, [cart]);
+    }, [cart, dataProAll.products]);
     return (
         <div className="px-[15px] lg:px-[0px] lg:mx-[-15px] lg:flex">
             <div className="lg:w-[75%] lg:px-[15px]">

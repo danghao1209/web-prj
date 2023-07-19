@@ -17,7 +17,7 @@ function App() {
         return true ? <Outlet /> : <Navigate to="/login" />;
     };
 
-    const { dataProAll, isLoading } = useSelector((state) => state.productsAll);
+    const { isLoading } = useSelector((state) => state.productsAll);
     const dispatch = useDispatch();
 
     useEffect(() => {

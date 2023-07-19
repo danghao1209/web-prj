@@ -6,7 +6,7 @@ import { CircularProgress } from '@mui/material';
 
 import { setLoading, setProfileData, setError } from '~/features/userSlice';
 import DefaultLayoutAccount from '~/pages/Account/DefaultLayoutAccount';
-import { pathApi, authApi } from '~/asset/path';
+import { pathApi } from '~/asset/path';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
 
 const fetchData = (tokenACCESS) =>

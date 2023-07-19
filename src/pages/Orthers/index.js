@@ -13,7 +13,7 @@ function OthersPage() {
         const filteredArray = _.filter(dataProAll.products, { category: 'Orthers' });
         setData(filteredArray);
         console.log(filteredArray);
-    }, []);
+    }, [dataProAll.products]);
 
     return (
         <div className="lg:px-[50px] lg:mx-[-15px]">

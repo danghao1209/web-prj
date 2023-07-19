@@ -1,6 +1,7 @@
 const routes = {
     home: '/',
     product: '/product/:id',
+    about: 'about',
     profile: '/account',
     orders: '/account/orders',
     changepassword: '/account/changepassword',

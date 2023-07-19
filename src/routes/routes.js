@@ -9,7 +9,7 @@ import AllProduct from '~/pages/AllProduct';
 import TopPage from '~/pages/Top';
 import Product from '~/pages/Product';
 import Search from '~/pages/Search';
-import Contact from '~/pages/Contact';
+import ContactPage from '~/pages/Contact';
 import Cart from '~/pages/Cart';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
@@ -31,6 +31,7 @@ import BagPage from '~/pages/Bag';
 import HatPage from '~/pages/Hat';
 import OrthersPage from '~/pages/Orthers';
 import AllSale from '~/pages/AllSale';
+import AboutPage from '~/pages/About';
 //public routes
 const publicRoutes = [
     { path: config.routes.home, component: Home },
@@ -39,7 +40,7 @@ const publicRoutes = [
     { path: config.routes.top, component: TopPage },
     { path: config.routes.bottom, component: BottomPage },
     { path: config.routes.accessory, component: AccessoryPage },
-
+    { path: config.routes.about, component: AboutPage },
     { path: config.routes.tshirt, component: TShirtPage },
     { path: config.routes.shirt_polo, component: ShirtPage },
     { path: config.routes.hoodie, component: HoodiePage },
@@ -53,7 +54,7 @@ const publicRoutes = [
 
     { path: config.routes.product, component: Product },
     { path: config.routes.search, component: Search },
-    { path: config.routes.contact, component: Contact },
+    { path: config.routes.contact, component: ContactPage },
     { path: config.routes.cart, component: Cart },
     { path: config.routes.login, component: Login },
     { path: config.routes.register, component: Register },

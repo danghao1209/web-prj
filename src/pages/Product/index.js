@@ -83,7 +83,7 @@ function Product() {
         } finally {
             dispatch(setLoading(false));
         }
-    }, []);
+    }, [dataProAll.products]);
 
     useEffect(() => {
         const filteredProducts = _.filter(dataProAll?.products, (product) => product._id !== id);

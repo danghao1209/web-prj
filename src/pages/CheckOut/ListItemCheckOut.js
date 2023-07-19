@@ -13,7 +13,7 @@ function ListItemCheckOut({ data }) {
             setDataPro(foundItem);
             console.log(foundItem);
         })();
-    }, [dataProAll]);
+    }, [dataProAll.products]);
     return (
         <div className="w-full flex pt-[14px]">
             <div className="relative w-[10%] h-[50px] border rounded-[4px]">

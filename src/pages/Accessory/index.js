@@ -18,7 +18,7 @@ function AccessoryPage() {
         );
         setData(filteredArray);
         console.log(filteredArray);
-    }, []);
+    }, [dataProAll.products]);
 
     return (
         <div className="lg:px-[50px] lg:mx-[-15px]">

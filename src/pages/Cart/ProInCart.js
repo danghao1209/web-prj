@@ -24,7 +24,7 @@ export default function ProInCart({ data }) {
             const foundItem = _.find(dataProAll.products, { _id: data.id });
             setDataPro(foundItem);
         })();
-    }, [dataProAll]);
+    }, [dataProAll.products]);
 
     const handleQuantityChange = async () => {
         try {
