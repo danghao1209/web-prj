@@ -49,7 +49,7 @@ function SubmitNewPassword() {
                     </div>
 
                     <input
-                        type="text"
+                        type="password"
                         className="h-[38px] bg-[#fff] w-full px-[15px] border border-[#e5e5e5] rounded-[3px] outline-0 shadow-none"
                         placeholder="Mật khẩu mới"
                         value={newPassword1}
@@ -63,7 +63,7 @@ function SubmitNewPassword() {
                         Xác nhận lại mật khẩu<div className="ml-[5px]">*</div>
                     </div>
                     <input
-                        type="text"
+                        type="password"
                         className="h-[38px] bg-[#fff] w-full px-[15px] border border-[#e5e5e5] rounded-[3px] outline-0 shadow-none"
                         placeholder="Xác nhận lại mật khẩu"
                         value={newPassword2}
