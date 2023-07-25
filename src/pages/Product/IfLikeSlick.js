@@ -22,7 +22,7 @@ function IfLikeSlick({ data }) {
                       return (
                           <div className="px-[15px] flex flex-col relative">
                               <div className="flex flex-col relative">
-                                  <img src={`${pathApi}/public/${item?.thumbnail[0]}`} alt="" />
+                                  <img src={`${item?.thumbnail[0]?.url}`} alt="" />
                                   <div className="absolute bottom-[120px] right-[10px] flex">
                                       <div className="w-[15px] h-[15px] bg-[#111827] mr-[5px]"></div>
                                       <div className="w-[15px] h-[15px] bg-[#111827] mr-[5px]"></div>

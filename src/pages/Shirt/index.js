@@ -10,7 +10,7 @@ function ShirtPage() {
     const [data, setData] = useState();
     const { dataProAll } = useSelector((state) => state.productsAll);
     useEffect(() => {
-        const filteredArray = _.filter(dataProAll.products, { category: 'Shirt' });
+        const filteredArray = _.filter(dataProAll.products, { category: 'Shirt&Polo' });
         setData(filteredArray);
         console.log(filteredArray);
     }, [dataProAll.products]);

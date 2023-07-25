@@ -12,10 +12,10 @@ function TopPage() {
     useEffect(() => {
         const filteredArray = _.filter(
             dataProAll.products,
-            { category: 'Tee&Polo' },
+            { category: 'Tee' },
             { category: 'Hoodie&Sweatshirt' },
             { category: 'Jacket' },
-            { category: 'Shirts' },
+            { category: 'Shirts&Polo' },
         );
         setData(filteredArray);
         console.log(filteredArray);

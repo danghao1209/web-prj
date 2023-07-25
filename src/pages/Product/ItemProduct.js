@@ -9,7 +9,7 @@ function ItemProduct({ data, path, indexColor = 0 }) {
                         ? data?.data[indexColor]?.images?.map((item) => {
                               return (
                                   <div className="w-[90px] mb-[15px]">
-                                      <img src={`${path}/public/${item}`} alt={''} />
+                                      <img src={`${item?.url}`} alt={''} />
                                   </div>
                               );
                           })
@@ -21,7 +21,7 @@ function ItemProduct({ data, path, indexColor = 0 }) {
                         ? data?.data[indexColor]?.images?.map((item) => {
                               return (
                                   <div className="w-[calc(100% - 120px)] mb-[15px]">
-                                      <img src={`${path}/public/${item}`} alt={''} />
+                                      <img src={`${item?.url}`} alt={''} />
                                   </div>
                               );
                           })

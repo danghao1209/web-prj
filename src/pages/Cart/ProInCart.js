@@ -10,7 +10,6 @@ import Button from '~/components/Button';
 import { changeQuantity, deleteProduct } from '~/features/cartSlice';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
 import ToastMessage from '~/components/Toast';
-import { pathApi } from '~/asset/path';
 
 export default function ProInCart({ data }) {
     const dispatch = useDispatch();
@@ -96,7 +95,7 @@ export default function ProInCart({ data }) {
             <div className="w-[25%] pr-[15px]">
                 <Link>
                     <img
-                        src={`${pathApi}/public/${dataPro?.data[data.color].images[0]}`}
+                        src={`${dataPro?.data[data.color].images[0]?.url}`}
                         alt=""
                         className="max-h-[180px] max-w-auto h-auto"
                     />

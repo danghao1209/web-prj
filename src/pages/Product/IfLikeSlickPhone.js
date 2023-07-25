@@ -1,7 +1,6 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { pathApi } from '~/asset/path';
 
 function IfLikeSlickPhone({ data }) {
     var settings = {
@@ -23,7 +22,7 @@ function IfLikeSlickPhone({ data }) {
                           <div className="px-[15px] flex flex-col z-2">
                               <div className="flex flex-col items-center justify-center">
                                   <div className="">
-                                      <img src={`${pathApi}/public/${item?.thumbnail[0]}`} alt="" />
+                                      <img src={`${item?.thumbnail[0]?.url}`} alt="" />
                                   </div>
                                   <div>
                                       <div className="mt-[20px] mb-[5px] text-[12px] text-ellipsis font-utm_aptima truncate">

@@ -215,7 +215,7 @@ function Product() {
                                                                 dispatch(setIndexColor(index));
                                                             }}
                                                         >
-                                                            <img src={`${pathApi}/public/${item.images[0]}`} alt="" />
+                                                            <img src={`${item.images[0]?.url}`} alt="" />
 
                                                             <div
                                                                 className={`${

@@ -20,7 +20,7 @@ function SliderProPhone({ images = [], path = '' }) {
             {images?.map((image, index) => (
                 <div className="px-[5px] flex flex-col relative z-2">
                     <div className="flex flex-col relative">
-                        <img src={`${path}/public/${image}`} alt={index} />
+                        <img src={`${image?.url}`} alt={index} />
                     </div>
                 </div>
             ))}
