@@ -10,14 +10,10 @@ function AccessoryPage() {
     const [data, setData] = useState();
     const { dataProAll } = useSelector((state) => state.productsAll);
     useEffect(() => {
-        const filteredArray = _.filter(
-            dataProAll.products,
-            { category: 'Hat' },
-            { category: 'Bag&Backpack' },
-            { category: 'Orthers' },
-        );
+        const filteredArray = _.filter(dataProAll.products, (product) => {
+            return product.category === 'Hat' || product.category === 'Bag&Backpack' || product.category === 'Orthers';
+        });
         setData(filteredArray);
-        console.log(filteredArray);
     }, [dataProAll.products]);
 
     return (

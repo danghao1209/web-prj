@@ -10,7 +10,10 @@ function BottomPage() {
     const [data, setData] = useState();
     const { dataProAll } = useSelector((state) => state.productsAll);
     useEffect(() => {
-        const filteredArray = _.filter(dataProAll.products, { category: 'Pants' }, { category: 'Shorts' });
+        const filteredArray = _.filter(dataProAll.products, (product) => {
+            return product.category === 'Pants' || product.category === 'Shorts';
+        });
+
         setData(filteredArray);
     }, [dataProAll.products]);
 
