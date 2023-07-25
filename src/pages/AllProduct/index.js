@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 
 import Product from '~/components/Product';
 import NavbarAllPro from '~/components/NavbarAllPro';
-import { pathApi } from '~/asset/path';
 
 function ProductPage() {
     const { dataProAll } = useSelector((state) => state.productsAll);
@@ -13,7 +12,7 @@ function ProductPage() {
                 {console.log(dataProAll?.products)}
                 {dataProAll?.products?.length !== 0 ? (
                     dataProAll?.products?.map((product) => {
-                        return <Product product={product} path={pathApi} />;
+                        return <Product product={product} />;
                     })
                 ) : (
                     <div>Chưa có sản phẩm nào.</div>

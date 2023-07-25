@@ -5,10 +5,10 @@ function Product({ product, path }) {
     return (
         <Link to={`../product/${product?._id}`} key={product?._id} className="px-[15px] flex flex-col relative">
             {isHover ? (
-                <div className="flex flex-col" onMouseOut={() => setIsHover(false)}>
+                <div className="flex flex-col lg:min-h-[436px]" onMouseOut={() => setIsHover(false)}>
                     <img src={`${product?.thumbnail[1]?.url}`} alt={product?.title} />
-                    <div className="absolute lg:bottom-[120px] lg:right-[20px] flex">
-                        {product.data.map((color) => {
+                    <div className="absolute bottom-[95px] lg:bottom-[120px] right-[20px] flex">
+                        {product?.data?.map((color) => {
                             return <div className={`w-[15px] h-[15px] bg-[${color?.color}] mr-[5px]`}></div>;
                         })}
                     </div>
@@ -27,7 +27,6 @@ function Product({ product, path }) {
                     />
                     <div className="absolute bottom-[95px] lg:bottom-[120px] right-[20px] flex">
                         {product?.data?.map((color) => {
-                            console.log(color.color);
                             return <div className={`w-[15px] h-[15px] bg-[${color?.color}] mr-[5px]`}></div>;
                         })}
                     </div>
