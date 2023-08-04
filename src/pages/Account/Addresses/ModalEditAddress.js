@@ -83,7 +83,7 @@ function ModalEditAdrress({ isShow = false, handleClose, addresses }) {
             } catch (err) {
                 console.log(err.message);
                 if (err.message === 'Request failed with status code 400') {
-                    throw new Error('Mật khẩu cũ không chính xác');
+                    throw new Error('Số điện thoại không chính xác');
                 }
                 const newTokenAccess = await GetNewAccessToken();
                 try {

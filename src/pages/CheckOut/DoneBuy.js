@@ -7,22 +7,22 @@ import ListItemCheckOut from './ListItemCheckOut';
 
 function DoneBuy({ sold }) {
     return (
-        <div className="py-[40px]">
+        <div className="py-[20px]">
             <div className="lg:max-w-[95em] w-full lg:px-[2em] lg:mx-auto">
                 <div className="lg:flex pb-[1.5em] justify-center relative">
                     <div className="lg:absolute lg:top-0 lg:left-0 flex items-center justify-center lg:block lg:pb-[1.5em] border-b lg:border-b-0 pb-[10px] drop-shadow-md">
-                        <Link to={'/'}>
-                            <img src={logo} alt="Logo" />
+                        <Link to={'/'} className="w-[300px] pb-[10px]">
+                            <img src={logo} alt="Logo" className="w-[300px] lg:w-[400px]" />
                         </Link>
                     </div>
 
                     <div className="flex-col-reverse lg:flex lg:flex-row w-full lg:pt-[20px]">
                         <div className="lg:w-[60%] px-[10px] lg:px-[2em] pt-[2em] lg:border-r lg:mt-[30px]">
-                            <div className="flex lg:mb-[30px]">
+                            <div className="flex lg:mb-[30px] ml-[10px]">
                                 <div className="font-thin mr-[16px] text-[#7FFFD4]">
                                     <FontAwesomeIcon icon={faCheckCircle} className="w-[72px] h-[72px]" />
                                 </div>
-                                <div>
+                                <div className="">
                                     <div className="font-medium">Cảm ơn bạn đã đặt hàng</div>
                                     <div className="text-[14px]">
                                         <div>Một email xác nhận đã được gửi tới {sold?.data?.email}.</div>
@@ -33,24 +33,24 @@ function DoneBuy({ sold }) {
                             <div className="border m-[14px] p-[14px]">
                                 <div className="flex ">
                                     <div className="w-[50%] mx-[14px]">
-                                        <div className="text-[20px] mb-[10px]">Thông tin mua hàng</div>
+                                        <div className="text-[16px] mb-[10px]">Thông tin mua hàng</div>
                                         <div className="mb-[5px]">{sold?.data?.name}</div>
                                         <div className="mb-[5px]">{sold?.data?.email}</div>
                                         <div className="mb-[5px]">{sold?.data?.phone}</div>
                                     </div>
                                     <div className="w-[50%] mx-[14px]">
-                                        <div className="text-[20px] mb-[10px]">Địa chỉ nhận hàng</div>
+                                        <div className="text-[16px] mb-[10px]">Địa chỉ nhận hàng</div>
                                         <div className="mb-[5px]">{sold?.data?.address}</div>
                                         <div className="mb-[5px]">Xã , Huyện , Tỉnh</div>
                                     </div>
                                 </div>
                                 <div className="flex mt-[20px]">
                                     <div className="w-[50%] mx-[14px]">
-                                        <div className="text-[20px] mb-[10px]">Phương thức thanh toán</div>
+                                        <div className="text-[16px] mb-[10px]">Phương thức thanh toán</div>
                                         <div className="mb-[5px]">Thanh toán khi giao hàng (COD)</div>
                                     </div>
                                     <div className="w-[50%] mx-[14px]">
-                                        <div className="text-[20px] mb-[10px]">Phương thức vận chuyển</div>
+                                        <div className="text-[16px] mb-[10px]">Phương thức vận chuyển</div>
                                         <div className="mb-[5px]">Chuyển phát nhanh</div>
                                     </div>
                                 </div>

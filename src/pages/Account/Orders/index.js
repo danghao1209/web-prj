@@ -65,7 +65,7 @@ function Orders() {
     }, []);
     return (
         <DefaultLayerAccount>
-            <div className="lg:px-[20px]">
+            <div className="lg:px-[20px] mt-[30px] ">
                 <div className="uppercase text-[19px] mt-[20px] mb-[27px] text-[#212B25] font-normal">
                     Đơn hàng của bạn
                 </div>

@@ -22,35 +22,38 @@ function ProfilePage() {
     const { profileData, isLoading } = useSelector((state) => state.user);
 
     useEffect(() => {
-        const tokenACCESS = localStorage.getItem('tokenACCESS');
-        const tokenREFRESH = localStorage.getItem('tokenREFRESH');
+        if (!profileData) {
+            const tokenACCESS = localStorage.getItem('tokenACCESS');
+            const tokenREFRESH = localStorage.getItem('tokenREFRESH');
 
-        if (!tokenREFRESH) {
-            navigate('/login', { replace: true });
-            return;
-        }
-        (async () => {
-            try {
-                dispatch(setLoading(true));
-                const response = await fetchData(tokenACCESS);
-                dispatch(setProfileData(response.data.data));
-                dispatch(setLoading(false));
-            } catch (error) {
-                try {
-                    const newTokenAccess = await GetNewAccessToken();
-                    localStorage.setItem('tokenACCESS', newTokenAccess.data.tokenACCESS);
-                    const newProfileData = await fetchData(newTokenAccess.data.tokenACCESS);
-                    dispatch(setProfileData(newProfileData.data.data));
-                } catch (error) {
-                    localStorage.removeItem('tokenACCESS');
-                    localStorage.removeItem('tokenREFRESH');
-                    dispatch(setError(error));
-                    navigate('/login', { replace: true });
-                } finally {
-                    dispatch(setLoading(false));
-                }
+            if (!tokenREFRESH) {
+                navigate('/login', { replace: true });
+                return;
             }
-        })();
+            (async () => {
+                try {
+                    dispatch(setLoading(true));
+                    const response = await fetchData(tokenACCESS);
+                    dispatch(setProfileData(response.data.data));
+                    dispatch(setLoading(false));
+                } catch (error) {
+                    try {
+                        const newTokenAccess = await GetNewAccessToken();
+                        localStorage.setItem('tokenACCESS', newTokenAccess.data.tokenACCESS);
+                        const newProfileData = await fetchData(newTokenAccess.data.tokenACCESS);
+                        dispatch(setProfileData(newProfileData.data.data));
+                    } catch (error) {
+                        localStorage.removeItem('tokenACCESS');
+                        localStorage.removeItem('tokenREFRESH');
+                        dispatch(setError(error));
+                        navigate('/login', { replace: true });
+                    } finally {
+                        dispatch(setLoading(false));
+                    }
+                }
+            })();
+        }
+        return;
     }, []);
 
     if (isLoading) {
@@ -66,7 +69,7 @@ function ProfilePage() {
     return (
         <DefaultLayoutAccount>
             <div>
-                <div className="uppercase text-[19px] mt-[10px] mb-[27px] text-[#212B25] font-normal">
+                <div className="uppercase text-[19px] mt-[30px] mb-[27px] text-[#212B25] font-normal">
                     Thông Tin Tài Khoản
                 </div>
                 {/* sau này sử dụng vòng lặp với api */}

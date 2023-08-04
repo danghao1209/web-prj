@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import ToastMessage, { success, error } from '~/components/Toast';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
 import { pathApi } from '~/asset/path';
+import { useSelector } from 'react-redux';
 
 function Modal({ isShow = false, handleClose, dataAdd }) {
     const [data, setData] = useState();
@@ -17,6 +18,7 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
     const [name, setName] = useState();
     const [phone, setPhone] = useState();
     const [address, setAddress] = useState();
+    const { addressData } = useSelector((state) => state.user);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -40,7 +42,7 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
         try {
             const tokenACCESS = localStorage.getItem('tokenACCESS');
             const tokenREFRESH = localStorage.getItem('tokenREFRESH');
-
+            setPhone(addressData?.phone);
             if (!tokenREFRESH) {
                 navigate('/login', { replace: true });
                 return;
@@ -96,8 +98,7 @@ function Modal({ isShow = false, handleClose, dataAdd }) {
                 }
             }
         } catch (err) {
-            console.log(err.message);
-            error(err.message);
+            error('Sử dụng số điện thoại đã đăng kí');
         }
     };
 

@@ -79,8 +79,40 @@ function Addresses() {
                 <div className="uppercase text-[19px] mt-[30px] lg:mt-[10px] mb-[27px] text-[#212B25] font-normal">
                     Địa Chỉ Của Bạn
                 </div>
-                {addressData ? (
-                    ''
+                {addressData?.address ? (
+                    <div>
+                        <div className="px-[15px] text-[14px]">
+                            <div className="pt-[16px] mt-[20px] border-t-[1px] flex">
+                                <div className="w-[65%] pb-[5px] mb-[15px]">
+                                    <div className="py-[10px]">
+                                        <div className="mb-[10px]">
+                                            <strong>Họ tên: {addressData?.name}</strong>
+                                        </div>
+                                        <div className="mb-[10px]">
+                                            <strong>Địa chỉ:</strong>{' '}
+                                            {`${addressData?.address}, ${
+                                                DataAddress[addressData?.tinh?.index]?.Districts[
+                                                    addressData?.huyen?.index
+                                                ]?.Wards[addressData?.xa?.index]?.Name
+                                            }, ${
+                                                DataAddress[addressData?.tinh?.index]?.Districts[
+                                                    addressData?.huyen?.index
+                                                ]?.Name
+                                            }, ${DataAddress[addressData?.tinh?.index]?.Name}`}
+                                        </div>
+                                        <div className="mb-[10px]">
+                                            <strong>Số điện thoại:</strong> {addressData?.phone}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="w-[35%] flex justify-center items-center ">
+                                    <div className="underline px-[10px] py-[5px]" onClick={handleShowEdit}>
+                                        Chỉnh sửa địa chỉ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ) : (
                     <Button
                         className="bg-[#1c1c1c] font-medium px-[28px] h-[40px] text-[#fff] text-[12px] uppercase border-0 outline-0 transition-all hover:bg-[#fff] hover:text-[#1c1c1c] hover:border hover:border-[#1c1c1c] duration-450 ease-cubic"
@@ -89,45 +121,17 @@ function Addresses() {
                         Thêm Địa Chỉ
                     </Button>
                 )}
-                <div className="relative">
-                    <Modal isShow={isShow} setIsShow={setIsShow} handleShow={handleShow} handleClose={handleClose} />
-                </div>
-                <div className="px-[15px] text-[14px]">
-                    <div className="pt-[16px] mt-[20px] border-t-[1px] flex">
-                        <div className="w-[65%] pb-[5px] mb-[15px]">
-                            <div className="py-[10px]">
-                                <div className="mb-[10px]">
-                                    <strong>Họ tên: {addressData?.name}</strong>
-                                </div>
-                                <div className="mb-[10px]">
-                                    <strong>Địa chỉ:</strong>{' '}
-                                    {`${addressData?.address}, ${
-                                        DataAddress[addressData?.tinh.index]?.Districts[addressData?.huyen.index]
-                                            ?.Wards[addressData?.xa.index]?.Name
-                                    }, ${
-                                        DataAddress[addressData?.tinh.index]?.Districts[addressData?.huyen.index]?.Name
-                                    }, ${DataAddress[addressData?.tinh.index]?.Name}`}
-                                </div>
-                                <div className="mb-[10px]">
-                                    <strong>Số điện thoại:</strong> {addressData?.phone}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-[35%] flex justify-center items-center ">
-                            <div className="underline px-[10px] py-[5px]" onClick={handleShowEdit}>
-                                Chỉnh sửa địa chỉ
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="relative">
-                    <ModalEditAdrress
-                        isShow={isShowEdit}
-                        setIsShow={setIsShowEdit}
-                        handleShow={handleShowEdit}
-                        handleClose={handleCloseEdit}
-                    />
-                </div>
+            </div>
+            <div className="relative">
+                <ModalEditAdrress
+                    isShow={isShowEdit}
+                    setIsShow={setIsShowEdit}
+                    handleShow={handleShowEdit}
+                    handleClose={handleCloseEdit}
+                />
+            </div>
+            <div className="relative">
+                <Modal isShow={isShow} setIsShow={setIsShow} handleShow={handleShow} handleClose={handleClose} />
             </div>
         </DefaultLayerAccount>
     );

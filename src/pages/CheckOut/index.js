@@ -1,10 +1,10 @@
+import axios from 'axios';
 import logo from '~/asset/images/logo.png';
 import vn from '~/asset/icons/vn.svg';
 import { DataAddress } from '~/asset/files/DataAdress';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import GetNewAccessToken from '~/func/GetNewAccessToken';
 import { setAddressData } from '~/features/userSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -189,12 +189,12 @@ function CheckOut() {
             {sold?.status ? (
                 <DoneBuy sold={sold} />
             ) : (
-                <div className="w-full py-[40px]">
+                <div className="w-full py-[20px]">
                     <div className="lg:max-w-[95em] w-full lg:px-[2em] lg:mx-auto">
                         <div className="lg:flex pb-[1.5em] justify-center relative">
-                            <div className="lg:absolute lg:top-0 lg:left-0 flex items-center justify-center lg:block lg:pb-[1.5em] border-b lg:border-b-0 pb-[10px] drop-shadow-md">
-                                <Link to={'/'}>
-                                    <img src={logo} alt="Logo" />
+                            <div className="lg:absolute lg:top-0 lg:left-0 flex items-center justify-center lg:block lg:pb-[1.5em] border-b lg:border-b-0 pb-[10px] drop-shadow-md ">
+                                <Link to={'/'} className="w-[300px] pb-[10px]">
+                                    <img src={logo} alt="Logo" className="w-[300px] lg:w-[400px]" />
                                 </Link>
                             </div>
                             <div className="flex-col-reverse lg:flex lg:flex-row w-full">

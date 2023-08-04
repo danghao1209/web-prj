@@ -74,7 +74,7 @@ function ChangePassword() {
     return (
         <DefaultLayerAccount>
             <div>
-                <div className="uppercase text-[19px] mt-[10px] mb-[27px] text-[#212B25] font-normal">Đổi mật khẩu</div>
+                <div className="uppercase text-[19px] mt-[30px] mb-[27px] text-[#212B25] font-normal">Đổi mật khẩu</div>
                 <div>
                     <div className="text-[14px] mb-[15px]">
                         Để đảm bảo tính bảo mật vui lòng đặt mật khẩu với ít nhất 8 kí tự

@@ -11,6 +11,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import Button from '~/components/Button';
+import logo from '~/asset/images/logo.png';
 
 function Footer() {
     return (
@@ -18,11 +19,8 @@ function Footer() {
             <div className="lg:mx-[200px]">
                 <div className=" lg:flex justify-center lg:mx-[-15px] box-border w-[full]">
                     <div className="flex flex-col items-center justify-center w-[full] mb-[10px] lg:w-[25%] lg:px-[15px] lg:mr-[20px]">
-                        <div className="pt-[4px] pb-[30px]">
-                            <img
-                                src="https://bizweb.dktcdn.net/100/414/728/themes/867455/assets/logo.png?1675329140775"
-                                alt="logo"
-                            />
+                        <div className="pt-[4px] pb-[30px] w-[300px]">
+                            <img src={logo} alt="logo" />
                         </div>
 
                         <div className="flex items-center mb-[15px]">
@@ -39,11 +37,11 @@ function Footer() {
                     <div className="flex flex-col ml-[10px] justify-center w-[full] lg:w-[25%] font-semibold">
                         <div className="flex items-center mb-[15px]">
                             <FontAwesomeIcon icon={faHouse} />
-                            <div className="pl-[10px]">CLOWNZ STORE</div>
+                            <div className="pl-[10px]">DahaClown</div>
                         </div>
                         <div className="flex items-center mb-[15px]">
                             <FontAwesomeIcon icon={faLocationDot} />
-                            <div className="pl-[10px]">45 Núi Trúc, Ba Đình, HN</div>
+                            <div className="pl-[10px]">68 Triều Khúc, Thanh Trì, HN</div>
                         </div>
                         <div className="flex items-center mb-[15px]">
                             <FontAwesomeIcon icon={faLocationDot} />

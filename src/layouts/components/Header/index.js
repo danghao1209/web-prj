@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useNavigate } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
 import Button from '~/components/Button';
+import logo from '~/asset/images/logo.png';
 
 function Header() {
     const ref = useRef();
@@ -180,8 +181,8 @@ function Header() {
                     <div className="basis-[33.3333%]">
                         <Link to="/">
                             <img
-                                src="https://bizweb.dktcdn.net/100/414/728/themes/867455/assets/logo.png?1685614743610"
-                                className="m-auto leading-[23.8px] max-w-[100%]  h-auto "
+                                src={logo}
+                                className="m-auto leading-[23.8px] max-w-[100%] lg:w-[300px]  h-auto "
                                 alt="Logo"
                             />
                         </Link>
