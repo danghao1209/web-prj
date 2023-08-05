@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Fragment, useEffect, Suspense } from 'react';
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { CircularProgress, Skeleton } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 import { publicRoutes, privateRoutes, nonDefaultLayoutRoutes } from '~/routes';
 import DefaultLayout from '~/layouts';
