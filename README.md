@@ -56,13 +56,12 @@
 ## About The Project
 
 
-To create a Restful API for the DahaClown website, I created this API using Nodejs, ExpressJs, and more.
-Using JWT to Authentication.
-
-Send OTP by email to forget the password. Redis helps to cache OTP and not send more than 5 times within 5 minutes.
-
-Use a queue to process purchase orders to avoid buying when there is only 1 product left that many people buy. In the future will move to microservices and use Kafka.
-
+Create a website selling clothes with Reactjs and use API from Nodejs.
+The technology used is the Tailwindcss library to css the page. Redux-toolkit to create global states for the web.
+Define routes for pages using react-route-dom.
+Use Axios to request to the server.
+And use a few other libraries like react-toastify, react-slick, font awesome-icons, ... to create notifications and UI.
+The development direction is to convert to NextJs in the future to suit SEO.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -71,13 +70,13 @@ Use a queue to process purchase orders to avoid buying when there is only 1 prod
 
 Frameworks/libraries used to bootstrap this project:
 
-* [![react](./src/react.svg)](https://badges.aleen42.com/src/react.svg) A badge used for repositories that using [React](https://github.com/facebook/react)
-* [![javascript](./src/javascript.svg)](https://badges.aleen42.com/src/javascript.svg) A badge used for projects that coded with JavaScript
-* [![tailwindcss](./src/tailwindcss.svg)](https://badges.aleen42.com/src/tailwindcss.svg) A badge used for projects using [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
-* [![redux](./src/redux.svg)](https://badges.aleen42.com/src/redux.svg) A badge used for projects using React Redux
-* [![visual_studio_code](./src/visual_studio_code.svg)](https://badges.aleen42.com/src/visual_studio_code.svg) A badge for the Visual Studio Code IDE
-* [![github](./src/github.svg)](https://badges.aleen42.com/src/github.svg) A badge used for GitHub repositories
-* [![eslint](./src/eslint.svg)](https://badges.aleen42.com/src/eslint.svg) A badge used for projects using ESLint
+* ![react](./src/react.svg)(https://badges.aleen42.com/src/react.svg) A badge used for repositories that using [React](https://github.com/facebook/react)
+* ![javascript](./src/javascript.svg)(https://badges.aleen42.com/src/javascript.svg) A badge used for projects that coded with JavaScript
+* ![tailwindcss](./src/tailwindcss.svg)(https://badges.aleen42.com/src/tailwindcss.svg) A badge used for projects using [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
+* ![redux](./src/redux.svg)(https://badges.aleen42.com/src/redux.svg) A badge used for projects using React Redux
+* ![visual_studio_code](./src/visual_studio_code.svg)(https://badges.aleen42.com/src/visual_studio_code.svg) A badge for the Visual Studio Code IDE
+* ![github](./src/github.svg)(https://badges.aleen42.com/src/github.svg) A badge used for GitHub repositories
+* ![eslint](./src/eslint.svg)(https://badges.aleen42.com/src/eslint.svg) A badge used for projects using ESLint
  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
