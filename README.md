@@ -25,7 +25,8 @@
   </p>
 </div>
 
-![Uploading image.png…]()
+![11](https://github.com/haotamht/web-prj/assets/62649837/ac10abb9-d81e-4980-9618-81715286fd13)
+
 
 
 <!-- TABLE OF CONTENTS -->
@@ -123,7 +124,9 @@ _Below is an example of how you can instruct your audience on installing and set
 -  Run the project and edit as desired : 
 EXAMPLES Image : If use run in localhost
            
-            ![image](https://github.com/haotamht/web-prj/assets/62649837/7d9c8fe2-8dec-4879-b7e9-4d75e79628bb)
+
+![11](https://github.com/haotamht/web-prj/assets/62649837/f724fc62-c67d-47a4-9902-c17d6942c2bb)
+
 
 
 
