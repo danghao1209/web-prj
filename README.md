@@ -70,13 +70,14 @@ The development direction is to convert to NextJs in the future to suit SEO.
 
 Frameworks/libraries used to bootstrap this project:
 
-* ![react](./src/react.svg)(https://badges.aleen42.com/src/react.svg) A badge used for repositories that using [React](https://github.com/facebook/react)
-* ![javascript](./src/javascript.svg)(https://badges.aleen42.com/src/javascript.svg) A badge used for projects that coded with JavaScript
-* ![tailwindcss](./src/tailwindcss.svg)(https://badges.aleen42.com/src/tailwindcss.svg) A badge used for projects using [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
-* ![redux](./src/redux.svg)(https://badges.aleen42.com/src/redux.svg) A badge used for projects using React Redux
-* ![visual_studio_code](./src/visual_studio_code.svg)(https://badges.aleen42.com/src/visual_studio_code.svg) A badge for the Visual Studio Code IDE
-* ![github](./src/github.svg)(https://badges.aleen42.com/src/github.svg) A badge used for GitHub repositories
-* ![eslint](./src/eslint.svg)(https://badges.aleen42.com/src/eslint.svg) A badge used for projects using ESLint
+- [![react](./src/react.svg)](https://badges.aleen42.com/src/react.svg) A badge used for repositories that using [React](https://github.com/facebook/react)
+- [![javascript](./src/javascript.svg)](https://badges.aleen42.com/src/javascript.svg) A badge used for projects that coded with JavaScript
+- [![tailwindcss](./src/tailwindcss.svg)](https://badges.aleen42.com/src/tailwindcss.svg) A badge used for projects using [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
+- [![redux](./src/redux.svg)](https://badges.aleen42.com/src/redux.svg) A badge used for projects using React Redux
+- [![visual_studio](./src/visual_studio.svg)](https://badges.aleen42.com/src/visual_studio.svg) A badge for the Visual Studio IDE
+- [![github](./src/github.svg)](https://badges.aleen42.com/src/github.svg) A badge used for GitHub repositories
+- [![eslint](./src/eslint.svg)](https://badges.aleen42.com/src/eslint.svg) A badge used for projects using ESLint
+- [![react-router](./src/react-router.svg)](https://badges.aleen42.com/src/react-router.svg) A badge used for projects using [React Router](https://github.com/remix-run/react-router)
  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
